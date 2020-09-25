@@ -3,12 +3,18 @@ package com.example.modelo;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 
 /**
  * The persistent class for the instructor_clase database table.
  * 
  */
 @Entity
+@Data
+
 @Table(name="instructor_clase")
 @NamedQuery(name="InstructorClase.findAll", query="SELECT i FROM InstructorClase i")
 public class InstructorClase implements Serializable {
@@ -28,31 +34,5 @@ public class InstructorClase implements Serializable {
 	@JoinColumn(name="idInstructor")
 	private Instructor instructor;
 
-	public InstructorClase() {
-	}
-
-	public int getIdInstructorClase() {
-		return this.idInstructorClase;
-	}
-
-	public void setIdInstructorClase(int idInstructorClase) {
-		this.idInstructorClase = idInstructorClase;
-	}
-
-	public Clase getClase() {
-		return this.clase;
-	}
-
-	public void setClase(Clase clase) {
-		this.clase = clase;
-	}
-
-	public Instructor getInstructor() {
-		return this.instructor;
-	}
-
-	public void setInstructor(Instructor instructor) {
-		this.instructor = instructor;
-	}
 
 }

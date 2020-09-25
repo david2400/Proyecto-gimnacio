@@ -3,12 +3,15 @@ package com.example.modelo;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import lombok.Data;
+
 
 /**
  * The persistent class for the rutina_ejercicio database table.
  * 
  */
 @Entity
+@Data
 @Table(name="rutina_ejercicio")
 @NamedQuery(name="RutinaEjercicio.findAll", query="SELECT r FROM RutinaEjercicio r")
 public class RutinaEjercicio implements Serializable {
@@ -28,31 +31,5 @@ public class RutinaEjercicio implements Serializable {
 	@JoinColumn(name="idRutina")
 	private Rutina rutina;
 
-	public RutinaEjercicio() {
-	}
-
-	public int getIdRutinaEjercicio() {
-		return this.idRutinaEjercicio;
-	}
-
-	public void setIdRutinaEjercicio(int idRutinaEjercicio) {
-		this.idRutinaEjercicio = idRutinaEjercicio;
-	}
-
-	public Ejercicio getEjercicio() {
-		return this.ejercicio;
-	}
-
-	public void setEjercicio(Ejercicio ejercicio) {
-		this.ejercicio = ejercicio;
-	}
-
-	public Rutina getRutina() {
-		return this.rutina;
-	}
-
-	public void setRutina(Rutina rutina) {
-		this.rutina = rutina;
-	}
 
 }

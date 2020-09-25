@@ -2,6 +2,9 @@ package com.example.modelo;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import lombok.Data;
+
 import java.util.List;
 
 
@@ -10,6 +13,7 @@ import java.util.List;
  * 
  */
 @Entity
+@Data
 @NamedQuery(name="Tiposala.findAll", query="SELECT t FROM Tiposala t")
 public class Tiposala implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -24,45 +28,6 @@ public class Tiposala implements Serializable {
 	@OneToMany(mappedBy="tiposala")
 	private List<Sala> salas;
 
-	public Tiposala() {
-	}
-
-	public int getIdTipoSala() {
-		return this.idTipoSala;
-	}
-
-	public void setIdTipoSala(int idTipoSala) {
-		this.idTipoSala = idTipoSala;
-	}
-
-	public String getNombre() {
-		return this.nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public List<Sala> getSalas() {
-		return this.salas;
-	}
-
-	public void setSalas(List<Sala> salas) {
-		this.salas = salas;
-	}
-
-	public Sala addSala(Sala sala) {
-		getSalas().add(sala);
-		sala.setTiposala(this);
-
-		return sala;
-	}
-
-	public Sala removeSala(Sala sala) {
-		getSalas().remove(sala);
-		sala.setTiposala(null);
-
-		return sala;
-	}
+	
 
 }

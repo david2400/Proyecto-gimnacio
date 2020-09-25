@@ -3,12 +3,15 @@ package com.example.modelo;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import lombok.Data;
+
 
 /**
  * The persistent class for the socio_clase database table.
  * 
  */
 @Entity
+@Data
 @Table(name="socio_clase")
 @NamedQuery(name="SocioClase.findAll", query="SELECT s FROM SocioClase s")
 public class SocioClase implements Serializable {
@@ -27,31 +30,6 @@ public class SocioClase implements Serializable {
 	@JoinColumn(name="idSocio")
 	private Socio socio;
 
-	public SocioClase() {
-	}
-
-	public int getIdSocioClase() {
-		return this.idSocioClase;
-	}
-
-	public void setIdSocioClase(int idSocioClase) {
-		this.idSocioClase = idSocioClase;
-	}
-
-	public Clase getClase() {
-		return this.clase;
-	}
-
-	public void setClase(Clase clase) {
-		this.clase = clase;
-	}
-
-	public Socio getSocio() {
-		return this.socio;
-	}
-
-	public void setSocio(Socio socio) {
-		this.socio = socio;
-	}
+	
 
 }
