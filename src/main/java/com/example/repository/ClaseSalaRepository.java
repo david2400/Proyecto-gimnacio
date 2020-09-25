@@ -3,7 +3,7 @@ package com.example.repository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.modelo.ClaseSala;
+import co.com.springboot.domain.ClaseSala;
 @Repository
 public interface ClaseSalaRepository  extends CrudRepository<ClaseSala,Integer>{
 

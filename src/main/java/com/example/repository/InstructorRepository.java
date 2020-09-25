@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.modelo.Instructor;
+import co.com.springboot.domain.Instructor;
 
 @Repository
 public interface InstructorRepository extends CrudRepository<Instructor,Integer> {

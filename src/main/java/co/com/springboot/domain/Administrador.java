@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.example.modelo;
+package co.com.springboot.domain;
 
 /**
  * @author Diego

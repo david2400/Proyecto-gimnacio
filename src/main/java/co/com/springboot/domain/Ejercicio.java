@@ -1,4 +1,4 @@
-package com.example.modelo;
+package co.com.springboot.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;

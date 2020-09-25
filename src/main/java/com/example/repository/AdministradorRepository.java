@@ -4,11 +4,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.modelo.Administrador;
+import co.com.springboot.domain.Administrador;
 
 
 @Repository
-public interface AdministracionRepository extends CrudRepository<Administrador,Integer>{
+public interface AdministradorRepository extends CrudRepository<Administrador,Integer>{
 	@Query("select a from administrador a where a.usuario=?1")
 	public Administrador validarUsuario(String usuario);
 	
