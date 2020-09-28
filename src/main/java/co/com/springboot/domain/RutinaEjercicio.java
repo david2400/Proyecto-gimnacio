@@ -12,7 +12,7 @@ import lombok.Data;
  */
 @Entity
 @Data
-@Table(name="rutina_ejercicio")
+@Table(name="rutina_ejercicio",schema="gimnasio")
 @NamedQuery(name="RutinaEjercicio.findAll", query="SELECT r FROM RutinaEjercicio r")
 public class RutinaEjercicio implements Serializable {
 	private static final long serialVersionUID = 1L;

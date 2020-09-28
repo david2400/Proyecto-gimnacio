@@ -16,6 +16,7 @@ import java.util.List;
  */
 @Entity
 @Data
+@Table(name="instructor",schema="gimnasio")
 
 @NamedQuery(name="Instructor.findAll", query="SELECT i FROM Instructor i")
 public class Instructor implements Serializable {

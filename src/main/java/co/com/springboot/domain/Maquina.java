@@ -14,7 +14,7 @@ import lombok.Data;
 @Entity
 @Data
 
-@Table(name="maquinas")
+@Table(name="maquinas",schema="gimnasio")
 @NamedQuery(name="Maquina.findAll", query="SELECT m FROM Maquina m")
 public class Maquina implements Serializable {
 	private static final long serialVersionUID = 1L;

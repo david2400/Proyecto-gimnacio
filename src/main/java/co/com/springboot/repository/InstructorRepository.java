@@ -1,4 +1,4 @@
-package com.example.repository;
+package co.com.springboot.repository;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

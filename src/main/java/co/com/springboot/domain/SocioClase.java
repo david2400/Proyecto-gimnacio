@@ -12,7 +12,7 @@ import lombok.Data;
  */
 @Entity
 @Data
-@Table(name="socio_clase")
+@Table(name="socio_clase",schema="gimnasio")
 @NamedQuery(name="SocioClase.findAll", query="SELECT s FROM SocioClase s")
 public class SocioClase implements Serializable {
 	private static final long serialVersionUID = 1L;

@@ -14,8 +14,7 @@ import lombok.Setter;
  */
 @Entity
 @Data
-
-@Table(name="clase_sala")
+@Table(name="clase_sala",schema="gimnasio")
 @NamedQuery(name="ClaseSala.findAll", query="SELECT c FROM ClaseSala c")
 public class ClaseSala implements Serializable {
 	private static final long serialVersionUID = 1L;

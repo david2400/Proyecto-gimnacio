@@ -9,39 +9,39 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-
-import com.example.repository.AdministradorRepository;
 import co.com.springboot.domain.Administrador;
+import co.com.springboot.repository.AdministradorRepository;
 
 @Controller
 public class controllerAdministrador {
+	
 private final AdministradorRepository  repoAdministrador;
 	
 	public controllerAdministrador(AdministradorRepository repoAdministrador) {
 		this.repoAdministrador= repoAdministrador;
 	}
 	
-	@PostMapping("/Registrar")
+	@PostMapping("/RegistrarAdministrador")
 	public String addUser(Administrador user, BindingResult result, Model model) {
 		if (result.hasErrors()) {
-			return "RegistrarVendedor";
+			return "RegistrarAdministrador";
 		}
-		Administrador u=repoAdministrador.validarUsuario(user);
+		Administrador u=repoAdministrador.validarUsuario(user.getUsuario());
 		Administrador us=repoAdministrador.Buscar(user.getCedula());
 		if(u==null && us ==null) {
-			repoVendedor.save(user);
-			model.addAttribute("vendedor", repoVendedor.findAll());
+			repoAdministrador.save(user);
+			model.addAttribute("administrador", repoAdministrador.findAll());
 			
-			return "indexVendedorLogueado";
+			return "indexAdministradorLogueado";
 		}else {
-			model.addAttribute("message", "un Vendedor ya esta registrado con ese Vendedor o esa cedula");
-			return "RegistrarVendedors";
+			model.addAttribute("message", "un Administrador ya esta registrado con ese Administradoro esa cedula");
+			return "RegistrarAdministrador";
 		}
 		
 	}
 	
-	@PostMapping("/ModificarVendedor/{cedula}")
-	public String updateUser(@PathVariable("cedula") Integer cedula,Vendedor user, BindingResult result,
+	@PostMapping("/ModificarAdministrador/{cedula}")
+	public String updateUser(@PathVariable("cedula") Integer cedula,Administrador user, BindingResult result,
 			Model model, @RequestParam("file")MultipartFile file) {
 		if (result.hasErrors()) {
 			System.out.println(result.getAllErrors());
@@ -54,9 +54,9 @@ private final AdministradorRepository  repoAdministrador;
 		try {
 			
 			//se crea la url del archivofoto
-	        Vendedor u=new Vendedor(user.getIdVendedor(),user.getCedula(),user.getCorreo(), user.getDireccion(), user.getNombre(),user.getTelefono(), user.getUsuario(), user.getPassword(),user.getVentas());
-			repoVendedor.save(u);
-			model.addAttribute("vendedor", repoVendedor.findAll());
+	        Administrador u=new Administrador(user.getIdAdministrador(),user.getCedula(),user.getCorreo(), user.get(), user.getNombre(),user.getTelefono(), user.getUsuario(), user.getPassword(),user.getVentas());
+			repoAdministrador.save(u);
+			model.addAttribute("administrador", repoAdministrador.findAll());
 			return "redirect:/IndexLog";
 		} catch (Exception e) {
 			
@@ -68,24 +68,24 @@ private final AdministradorRepository  repoAdministrador;
 
 	@GetMapping("/deleteVendedor/{cedula}")
 	public String delete(@PathVariable("cedula") Integer cedula, Model model) {
-		Vendedor Vendedor = repoVendedor.findById(cedula)
-				.orElseThrow(() -> new IllegalArgumentException("Invalid Vendedor Id:" + cedula));
-		repoVendedor.delete(Vendedor);
-		model.addAttribute("vendedor", repoVendedor.findAll());
+		Administrador administrador= repoAdministrador.findById(cedula)
+				.orElseThrow(() -> new IllegalArgumentException("Invalid AdministradorId:" + cedula));
+		repoAdministrador.delete(administrador);
+		model.addAttribute("administrador", repoAdministrador.findAll());
 		return "index";
 	}
 	
 	
 
 	@PostMapping("/Entrar")
-	public String Entrar(Vendedor usu ,Model model) {
-		Vendedor u = repoVendedor.login(usu.getUsuario(), usu.getPassword());
+	public String Entrar(Administrador usu,Model model) {
+		Administrador u = repoAdministrador.login(usu.getUsuario(), usu.getPassword());
 		if (u!=null) {
 			System.out.println(u.getPassword());
-			model.addAttribute("vendedor", repoVendedor.findAll());
+			model.addAttribute("administrador", repoAdministrador.findAll());
 			return "redirect:/IndexLog";
 		}else {
-			model.addAttribute("message", "Vendedor no se encuentra registrado");
+			model.addAttribute("message", "Administradorno se encuentra registrado");
 			return "Login";
 		}
 		
