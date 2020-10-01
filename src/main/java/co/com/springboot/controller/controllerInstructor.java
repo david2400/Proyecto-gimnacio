@@ -67,7 +67,7 @@ private final InstructorRepository  repoInstructor;
 		
 	}
 
-	@GetMapping("/deleteVendedor/{cedula}")
+	@GetMapping("/deleteInstru/{cedula}")
 	public String delete(@PathVariable("cedula") Integer cedula, Model model) {
 		Instructor Instructor= repoInstructor.findById(cedula)
 				.orElseThrow(() -> new IllegalArgumentException("Invalid InstructorId:" + cedula));

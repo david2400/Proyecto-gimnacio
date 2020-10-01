@@ -1,5 +1,7 @@
 package co.com.springboot.controller;
 
+import javax.persistence.Table;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -52,9 +54,8 @@ private final AdministradorRepository  repoAdministrador;
 		}
 
 		try {
-			
 			//se crea la url del archivofoto
-	        Administrador u=new Administrador(user.getIdAdministrador(),user.getCedula(),user.getCorreo(), user.get(), user.getNombre(),user.getTelefono(), user.getUsuario(), user.getPassword(),user.getVentas());
+	        Administrador u=new Administrador(user.getIdAdministrador(),user.getCedula(),user.getCorreo(), user.getFoto(), user.getNombre(),user.getCelular(), user.getUsuario(), user.getPassword());
 			repoAdministrador.save(u);
 			model.addAttribute("administrador", repoAdministrador.findAll());
 			return "redirect:/IndexLog";

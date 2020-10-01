@@ -23,7 +23,7 @@ public class Socio implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idsocio;
 
-	private String cedula;
+	private int cedula;
 
 	private String correo;
 

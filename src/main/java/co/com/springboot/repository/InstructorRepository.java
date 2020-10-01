@@ -12,7 +12,7 @@ public interface InstructorRepository extends CrudRepository<Instructor,Integer>
 	public Instructor validarUsuario(String usuario);
 	
 	@Query("select I from instructor I where I.cedula=?1")
-	public Instructor Buscar(String cedula);
+	public Instructor Buscar(int cedula);
 	
 	@Query("select I from instructor I where I.usuario=?1 AND I.password=?2")
 	public Instructor login(String usuario,String contrasena);

@@ -26,7 +26,7 @@ public class Instructor implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idInstructor;
 
-	private String cedula;
+	private int cedula;
 
 	private String celular;
 
@@ -38,13 +38,13 @@ public class Instructor implements Serializable {
 
 	private String nombre;
 
-	private String password;
-
 	private String preparacion;
 
 	private String titulacion;
 
 	private String usuario;
+	
+	private String password;
 
 	//bi-directional many-to-one association to InstructorClase
 	@OneToMany(mappedBy="instructor")

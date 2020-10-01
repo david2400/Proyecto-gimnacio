@@ -22,7 +22,6 @@ import lombok.Setter;
 
 @Entity
 @Data
-@Table(name="administrador",schema="gimnasio")
 @NamedQuery(name="Administrador.findAll", query="SELECT a FROM Administrador a")
 public class Administrador implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -31,7 +30,7 @@ public class Administrador implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idAdministrador;
 
-	private String cedula;
+	private int cedula;
 
 	private String celular;
 

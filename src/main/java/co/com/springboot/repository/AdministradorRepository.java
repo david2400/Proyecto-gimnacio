@@ -13,7 +13,7 @@ public interface AdministradorRepository extends CrudRepository<Administrador,In
 	public Administrador validarUsuario(String usuario);
 	
 	@Query("select a from administrador a where a.cedula=?1")
-	public Administrador Buscar(String cedula);
+	public Administrador Buscar(int cedula);
 	
 	@Query("select a from administrador a where a.usuario=?1 AND a.password=?2")
 	public Administrador login(String usuario,String contrasena);
