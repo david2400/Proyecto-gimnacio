@@ -2,6 +2,7 @@ package co.com.springboot.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 import lombok.Data;
 import lombok.Getter;
@@ -24,7 +25,7 @@ public class Rutina implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idRutina;
-
+	@NotBlank(message="Se te olvido Ingresar el nombre de la rutina")
 	private String nombre;
 
 	//bi-directional many-to-one association to Instructor

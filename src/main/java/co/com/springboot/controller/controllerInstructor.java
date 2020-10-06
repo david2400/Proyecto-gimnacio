@@ -1,5 +1,7 @@
 package co.com.springboot.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -41,31 +43,24 @@ private final InstructorRepository  repoInstructor;
 		
 	}
 	
-	@PostMapping("/ModificarInstructor/{cedula}")
-	public String updateUser(@PathVariable("cedula") Integer cedula,Instructor user, BindingResult result,
-			Model model, @RequestParam("file")MultipartFile file) {
-		if (result.hasErrors()) {
-			System.out.println(result.getAllErrors());
-			return "ModificarVendedor";
-		}
-		if(file.isEmpty()) {	
-			return "redirect:/IndexLog";
-		}
-
-		try {
-			
-			//se crea la url del archivofoto
-	        Instructor u=new Instructor(user.getIdInstructor(),user.getCedula(),user.getCorreo(), user.get(), user.getNombre(),user.getTelefono(), user.getUsuario(), user.getPassword(),user.getVentas());
-			repoInstructor.save(u);
-			model.addAttribute("instructor", repoInstructor.findAll());
-			return "redirect:/IndexLog";
-		} catch (Exception e) {
-			
-			return "indexLog";
-			
-		}
+	 //controlador Actualizar---------------------------------------------
+		@PostMapping("/update/{id}")
+	    public String updateUser(@PathVariable("id") long id,String correo,String celular,String password,String experienciaLaboral,String foto, @Valid Instructor user, BindingResult result, Model model) {
+	        if (result.hasErrors()) {
+	            user.setCorreo(correo);
+	            user.setCelular(celular);
+	            user.setExperienciaLaboral(experienciaLaboral);
+	            user.setFoto(foto);
+	            user.setPassword(password);
+	            	            
+	            return "Update-Instructor";	         	            
+	        }	        
+	        repoInstructor.save(user);
+	        model.addAttribute("instructor", repoInstructor.findAll());
+	        return "index";
+	    }
 		
-	}
+	
 
 	@GetMapping("/deleteInstru/{cedula}")
 	public String delete(@PathVariable("cedula") Integer cedula, Model model) {

@@ -1,5 +1,7 @@
 package co.com.springboot.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -40,32 +42,21 @@ private final SocioRepository  repoSocio;
 		
 	}
 	
-	@PostMapping("/ModificarSocio/{cedula}")
-	public String updateUser(@PathVariable("cedula") Integer cedula,Socio user, BindingResult result,
-			Model model, @RequestParam("file")MultipartFile file) {
-		if (result.hasErrors()) {
-			System.out.println(result.getAllErrors());
-			return "ModificarVendedor";
-		}
-		if(file.isEmpty()) {	
-			return "redirect:/IndexLog";
-		}
-
-		try {
-			
-			//se crea la url del archivofoto
-	        Socio u=new Socio(user.getIdSocio(),user.getCedula(),user.getCorreo(), user.get(), user.getNombre(),user.getTelefono(), user.getUsuario(), user.getPassword(),user.getVentas());
-			repoSocio.save(u);
-			model.addAttribute("socio", repoSocio.findAll());
-			return "redirect:/IndexLog";
-		} catch (Exception e) {
-			
-			return "indexLog";
-			
-		}
-		
-	}
-
+	@PostMapping("/updateSocio/{id}")
+    public String updateUser(@PathVariable("id") long id,String correo,String direccion,String password,String profesion, @Valid Socio user, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            user.setCorreo(correo);
+            user.setDireccion(direccion);
+            user.setProfesion(profesion);
+            user.setPassword(password);           
+            
+            return "Update-Administrador";	         	            
+        }	        
+        repoSocio.save(user);
+        model.addAttribute("users", repoSocio.findAll());
+        return "index";
+    }
+	
 	@GetMapping("/deleteSocio/{cedula}")
 	public String delete(@PathVariable("cedula") Integer cedula, Model model) {
 		Socio Socio= repoSocio.findById(cedula)

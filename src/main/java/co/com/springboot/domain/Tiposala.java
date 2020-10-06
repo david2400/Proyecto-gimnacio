@@ -2,6 +2,7 @@ package co.com.springboot.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 import lombok.Data;
 
@@ -23,6 +24,7 @@ public class Tiposala implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idTipoSala;
 
+	@NotBlank(message="Se te olvido Ingresar la nombre del tipo de la sala")
 	private String nombre;
 
 	//bi-directional many-to-one association to Sala

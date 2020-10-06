@@ -2,6 +2,7 @@ package co.com.springboot.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 import lombok.Data;
 
@@ -23,12 +24,17 @@ public class Maquina implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idMaquinas;
 
+	@NotBlank(message="Se te olvido Ingresar el codigo")
 	private String codigo;
+	
+	@NotBlank(message="Se te olvido Ingresar el nombre")
+	private String nombre;	
 
 	private String descripcion;
 
 	private String estado;
 
+	@NotBlank(message="Se te olvido añadir la foto de la maquina")
 	private String foto;
 
 	//bi-directional many-to-one association to Sala

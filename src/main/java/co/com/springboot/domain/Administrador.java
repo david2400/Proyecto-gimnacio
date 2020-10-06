@@ -9,6 +9,7 @@ package co.com.springboot.domain;
  */
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 import lombok.Data;
 import lombok.Getter;
@@ -27,11 +28,14 @@ public class Administrador implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idAdministrador;
-
+	
+	@NotBlank(message="Se te olvido Ingresar la cedula")	
 	private int cedula;
-
+	
+	@NotBlank(message="Se te olvido Ingresar el celular")
 	private String celular;
 
 	private String correo;
@@ -39,9 +43,11 @@ public class Administrador implements Serializable {
 	private String foto;
 
 	private String nombre;
-
+	
+	@NotBlank(message="Se te olvido Ingresar la contraseña")
 	private String password;
-
+	
+	@NotBlank(message="Se te olvido Ingresar el usuario")
 	private String usuario;
 
 	

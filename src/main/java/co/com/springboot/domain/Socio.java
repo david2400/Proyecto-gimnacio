@@ -2,6 +2,7 @@ package co.com.springboot.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 import lombok.Data;
 
@@ -22,21 +23,23 @@ public class Socio implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idsocio;
-
+	@NotBlank(message="Se te olvido Ingresar la cedula")
 	private int cedula;
 
 	private String correo;
 
-	private String dirrecion;
+	private String direccion;
 
 	private String nombre;
 
-	private String password;
-
-	private String profecion;
-
+	private String profesion;
+	
+	@NotBlank(message="Se te olvido Ingresar el usuario")
 	private String usuario;
 
+	@NotBlank(message="Se te olvido Ingresar la contraseña")
+	private String password;
+	
 	//bi-directional many-to-one association to Rutina
 	@OneToMany(mappedBy="socio")
 	private List<Rutina> rutinas;

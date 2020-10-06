@@ -59,7 +59,7 @@ function mytheme(index) {
             changeColor('blue');
             break;
         default:
-            changeColor('blue');
+            changeColor('orange');
     }
     var selectedClass = document.getElementById('wrapper').className;
     localStorage.setItem("selectedColor", selectedClass);

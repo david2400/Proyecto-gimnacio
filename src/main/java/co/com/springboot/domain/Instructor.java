@@ -2,6 +2,7 @@ package co.com.springboot.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 import lombok.Data;
 import lombok.Getter;
@@ -42,8 +43,10 @@ public class Instructor implements Serializable {
 
 	private String titulacion;
 
+	@NotBlank(message="Se te olvido Ingresar el usuario")
 	private String usuario;
 	
+	@NotBlank(message="Se te olvido Ingresar la contraseña")
 	private String password;
 
 	//bi-directional many-to-one association to InstructorClase

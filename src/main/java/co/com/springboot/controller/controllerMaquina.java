@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+
 import co.com.springboot.domain.Maquina;
 import co.com.springboot.repository.MaquinaRepository;
 
@@ -39,14 +40,7 @@ private final MaquinaRepository  repoMaquina;
 		return "Buscar";
 	}
     
-  //controlador Actualizar---------------------------------------------
-	@GetMapping("/editarMaquina /{idMaquinas}")
-	public String showUpdateForm(@PathVariable("idMaquinas") Integer id, Model model) {
-		Maquina  Maquina  = repoMaquina .findById(id).orElseThrow(() -> new IllegalArgumentException("no existe la Maquina  con la id:" + id));
-		model.addAttribute("maquinas", Maquina );
-		return "update-Maquina ";
-	}
-	
+ 
 	
     
     
