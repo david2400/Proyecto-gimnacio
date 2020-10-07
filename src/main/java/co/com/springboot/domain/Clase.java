@@ -38,9 +38,6 @@ public class Clase implements Serializable {
 
 	@Temporal(TemporalType.DATE)
 	private Date horaInicio;
-
-	@NotBlank(message="Se te olvido añadir al instructor encargado de la clase")
-	private int idInstructor;
 	
 	@NotBlank(message="Se te olvido Ingresar el nombre de la clase")
 	private String nombre;

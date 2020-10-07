@@ -25,6 +25,7 @@ public class Rutina implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idRutina;
+	
 	@NotBlank(message="Se te olvido Ingresar el nombre de la rutina")
 	private String nombre;
 

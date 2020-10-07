@@ -2,6 +2,7 @@ package co.com.springboot.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 import lombok.Data;
 
@@ -20,7 +21,9 @@ public class RutinaEjercicio implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idRutinaEjercicio;
-
+	
+	@NotBlank(message="Se te olvido Ingresar la repeticiones del ejercicio")
+	private int repeticiones;
 	//bi-directional many-to-one association to Ejercicio
 	@ManyToOne
 	@JoinColumn(name="idEjercicio")
