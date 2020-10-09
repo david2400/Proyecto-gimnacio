@@ -3,10 +3,9 @@ package co.com.springboot.domain;
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.List;
 
@@ -27,10 +26,13 @@ public class Ejercicio implements Serializable {
 	private int idEjercicio;
 
 	private String descripcion;
+	
+	@NotNull(message = "{error.campoObligatorio}")
 	@NotBlank(message="Se te olvido Ingresar el nombre del ejercicio")
 	private String nombre;
 
 	//bi-directional many-to-one association to RutinaEjercicio
+	@NotNull(message = "{error.campoObligatorio}")
 	@OneToMany(mappedBy="ejercicio")
 	private List<RutinaEjercicio> rutinaEjercicios;
 

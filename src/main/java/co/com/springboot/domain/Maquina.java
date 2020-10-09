@@ -3,6 +3,7 @@ package co.com.springboot.domain;
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 
@@ -23,10 +24,12 @@ public class Maquina implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idMaquinas;
-
+	
+	@NotNull(message = "{error.campoObligatorio}")
 	@NotBlank(message="Se te olvido Ingresar el codigo")
 	private String codigo;
 	
+	@NotNull(message = "{error.campoObligatorio}")	
 	@NotBlank(message="Se te olvido Ingresar el nombre")
 	private String nombre;	
 

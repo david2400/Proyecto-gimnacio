@@ -3,10 +3,9 @@ package co.com.springboot.domain;
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.Date;
 import java.util.List;
@@ -29,19 +28,25 @@ public class Clase implements Serializable {
 	private int idClase;
 
 	private String descripcion;
-
+	
+	@NotNull(message = "{error.campoObligatorio}")
 	@Temporal(TemporalType.DATE)
 	private Date fecha;
-
+	
+	@NotNull(message = "{error.campoObligatorio}")
 	@Temporal(TemporalType.DATE)
 	private Date horaFin;
-
+	
+	@NotNull(message = "{error.campoObligatorio}")
 	@Temporal(TemporalType.DATE)
 	private Date horaInicio;
 	
-	@NotBlank(message="Se te olvido Ingresar el nombre de la clase")
+	@NotNull(message = "{error.campoObligatorio}")
+	@NotBlank(message="El nombre de la clase es obligatoria")
+	
 	private String nombre;
-
+	
+	@NotNull(message = "{error.campoObligatorio}")
 	@NotBlank(message="Se te olvido Ingresar la sala donde se dara la clase")
 	@Column(name="sala_idsala")
 	private int salaIdsala;

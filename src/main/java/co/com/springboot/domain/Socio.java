@@ -3,6 +3,9 @@ package co.com.springboot.domain;
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import lombok.Data;
 
@@ -23,13 +26,19 @@ public class Socio implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idsocio;
+	
+	@Size(min = 5, max = 100, message = "{error.usuario.telefono}")
 	@NotBlank(message="Se te olvido Ingresar la cedula")
 	private int cedula;
 
+	@Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$",message="{error.usuario.correo}")
 	private String correo;
 
 	private String direccion;
 
+	@NotNull(message = "{error.campoObligatorio}")
+	@NotBlank(message = "Se te olvido Insertar la nombre")
+	@Pattern(regexp = "[A-Za-z ]+", message = "{error.sololetras}")
 	private String nombre;
 
 	private String profesion;
@@ -37,7 +46,7 @@ public class Socio implements Serializable {
 	@NotBlank(message="Se te olvido Ingresar el usuario")
 	private String usuario;
 
-	@NotBlank(message="Se te olvido Ingresar la contraseña")
+	@NotNull(message="Se te olvido Ingresar la contraseña")
 	private String password;
 	
 	//bi-directional many-to-one association to Rutina

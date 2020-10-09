@@ -2,11 +2,9 @@ package co.com.springboot.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.List;
 
@@ -30,10 +28,10 @@ public class Sala implements Serializable {
 
 	private String estado;
 	
-	@NotBlank(message="Se te olvido añadir la foto de la sala")
+	@NotNull(message="Se te olvido añadir la foto de la sala")
 	private String foto;
 
-	@NotBlank(message="Se te olvido Ingresar el numero de la sala")
+	@NotNull(message="Se te olvido Ingresar el numero de la sala")
 	private String numeroSala;
 
 	private String ubicacion;

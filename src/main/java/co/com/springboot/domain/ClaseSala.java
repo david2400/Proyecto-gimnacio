@@ -4,8 +4,6 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 
 /**
@@ -29,6 +27,7 @@ public class ClaseSala implements Serializable {
 	private Clase clase;
 
 	//bi-directional many-to-one association to Sala
+	
 	@ManyToOne
 	@JoinColumn(name="idSala")
 	private Sala sala;

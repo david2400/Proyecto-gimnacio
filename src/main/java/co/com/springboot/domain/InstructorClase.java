@@ -4,8 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+
 
 
 /**

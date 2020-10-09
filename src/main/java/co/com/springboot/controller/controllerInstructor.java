@@ -8,12 +8,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import co.com.springboot.domain.Instructor;
 import co.com.springboot.repository.InstructorRepository;
 
+@RequestMapping("/Instructor")
 @Controller
 public class controllerInstructor {
 
@@ -44,7 +46,7 @@ private final InstructorRepository  repoInstructor;
 	}
 	
 	 //controlador Actualizar---------------------------------------------
-		@PostMapping("/update/{id}")
+		@PostMapping("/updateInstructor/{id}")
 	    public String updateUser(@PathVariable("id") long id,String correo,String celular,String password,String experienciaLaboral,String foto, @Valid Instructor user, BindingResult result, Model model) {
 	        if (result.hasErrors()) {
 	            user.setCorreo(correo);
@@ -62,7 +64,7 @@ private final InstructorRepository  repoInstructor;
 		
 	
 
-	@GetMapping("/deleteInstru/{cedula}")
+	@GetMapping("/deleteInstrutor/{cedula}")
 	public String delete(@PathVariable("cedula") Integer cedula, Model model) {
 		Instructor Instructor= repoInstructor.findById(cedula)
 				.orElseThrow(() -> new IllegalArgumentException("Invalid InstructorId:" + cedula));
@@ -73,7 +75,7 @@ private final InstructorRepository  repoInstructor;
 	
 	
 
-	@PostMapping("/Entrar")
+	@PostMapping("/LoginInstructor")
 	public String Entrar(Instructor usu,Model model) {
 		Instructor u = repoInstructor.login(usu.getUsuario(), usu.getPassword());
 		if (u!=null) {

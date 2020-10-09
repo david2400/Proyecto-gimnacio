@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,6 +18,7 @@ import co.com.springboot.domain.Instructor;
 import co.com.springboot.repository.AdministradorRepository;
 
 @Controller
+@RequestMapping("/Administrador")
 public class controllerAdministrador {
 	
 private final AdministradorRepository  repoAdministrador;
@@ -72,7 +74,7 @@ private final AdministradorRepository  repoAdministrador;
 	
 	
 
-	@PostMapping("/Entrar")
+	@PostMapping("/LoginAdministrador")
 	public String Entrar(Administrador usu,Model model) {
 		Administrador u = repoAdministrador.login(usu.getUsuario(), usu.getPassword());
 		if (u!=null) {
@@ -80,7 +82,7 @@ private final AdministradorRepository  repoAdministrador;
 			model.addAttribute("administrador", repoAdministrador.findAll());
 			return "redirect:/IndexLog";
 		}else {
-			model.addAttribute("message", "Administradorno se encuentra registrado");
+			model.addAttribute("message", "El usuario no se encuentra registrado");
 			return "Login";
 		}
 		

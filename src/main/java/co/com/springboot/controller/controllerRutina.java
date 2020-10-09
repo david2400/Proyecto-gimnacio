@@ -6,10 +6,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import co.com.springboot.domain.Rutina ;
 import co.com.springboot.repository.RutinaRepository;
 
+@RequestMapping("/Rutina")
 @Controller
 public class controllerRutina {
 	private final RutinaRepository  repoRutina;

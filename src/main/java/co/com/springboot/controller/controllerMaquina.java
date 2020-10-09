@@ -6,11 +6,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import co.com.springboot.domain.Maquina;
 import co.com.springboot.repository.MaquinaRepository;
 
+@RequestMapping("/Maquina")
 @Controller
 public class controllerMaquina {
 private final MaquinaRepository  repoMaquina;
