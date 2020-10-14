@@ -1,4 +1,6 @@
 $(document).ready(function() {
+
+
     $("#panel-admin").css("display", "none");
 
     $('.open').click(function() {

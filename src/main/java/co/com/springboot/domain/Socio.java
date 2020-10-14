@@ -27,7 +27,7 @@ public class Socio implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idsocio;
 	
-	@Size(min = 5, max = 100, message = "{error.usuario.telefono}")
+	@Size(min = 5, max = 100, message = "{error.socio.celular}")
 	@NotBlank(message="Se te olvido Ingresar la cedula")
 	private int cedula;
 

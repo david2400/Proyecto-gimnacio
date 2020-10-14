@@ -1,5 +1,6 @@
 package co.com.springboot.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import co.com.springboot.domain.Clase;
 import co.com.springboot.repository.ClaseRepository;
@@ -16,25 +18,24 @@ import co.com.springboot.repository.ClaseRepository;
 @Controller
 public class controllerClase {
 	
-private final ClaseRepository repoClase;
+@Autowired
+private ClaseRepository repoClase;
 	
-	public controllerClase(ClaseRepository repoClase) {
-		this.repoClase= repoClase;
-	}
+	
 	
 	@PostMapping("/addClase")
-    public String addCategoria(Clase Clase, BindingResult result, Model model) {
+    public @ResponseBody String addClase(Clase Clase, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "add-Clase";
         }
         repoClase.save(Clase);
         model.addAttribute("clase", repoClase.findAll());
-        return "lista-Clase";
+        return "MenuInstructor";
     }    
     
     //controlador buscador por id---------------------------------------------
-	@GetMapping("/seachClase/{id_clase}")
-	public String buscar(@PathVariable("id_clase") Integer id) {
+	@GetMapping("/seachClase/{idClase}")
+	public @ResponseBody String buscar(@PathVariable("idClase") Integer id) {
 		Clase Clase = repoClase.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalido Clase id:" + id));
 
 		String mensaje = "ID: " + Clase.getIdClase() + " - Nombre " + Clase.getNombre().toString();
@@ -44,9 +45,10 @@ private final ClaseRepository repoClase;
 	}
     
 	
+	
   //controlador Actualizar---------------------------------------------
-	@GetMapping("/editarClase/{id_clase}")
-	public String showUpdateForm(@PathVariable("id_clase") Integer id, Model model) {
+	@GetMapping("/editarClase/{idClase}")
+	public @ResponseBody String showUpdateForm(@PathVariable("idClase") Integer id, Model model) {
 		Clase Clase = repoClase.findById(id).orElseThrow(() -> new IllegalArgumentException("no existe la Clase con la id:" + id));
 		model.addAttribute("clase", Clase);
 		return "update-Clase";
@@ -56,30 +58,18 @@ private final ClaseRepository repoClase;
     
     
     //controlador Eliminar---------------------------------------------
-	@GetMapping("/deleteClase/{id_clase}")
-	public String delete(@PathVariable("id_clase") Integer id, Model model) {
+	@GetMapping("/deleteClase/{idClase}")
+	public @ResponseBody String delete(@PathVariable("idClase") Integer id, Model model) {
 		Clase Clase = repoClase.findById(id).orElseThrow(() -> new IllegalArgumentException("no existe la Clase con la id:" + id));
 		repoClase.delete(Clase);
 			
 		return traerTodos(model);
 	}
 	
-	@GetMapping("/SociosClase/{id_clase}")
-	public String ClasesSocio(@PathVariable("id_clase") Integer idSocio,Model model) {
-		Iterable<Clase> lista = repoClase.SocioClase(idSocio);
-
-		for (Clase anuncio : lista) {
-			model.addAttribute("anuncios", lista);
-			System.out.println(anuncio.getNombre());
-
-		}
-		return "index";
-		
-	}
 	
 	
 	@GetMapping("/Todos-Clase")
-	public String traerTodos(Model model) {
+	public @ResponseBody String traerTodos(Model model) {
 		Iterable<Clase> lista = repoClase.findAll();
 		model.addAttribute("clase", lista);
 		for (Clase Clase : lista) {

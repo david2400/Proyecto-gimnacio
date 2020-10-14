@@ -11,8 +11,7 @@ import co.com.springboot.domain.Ejercicio;
 @Repository
 public interface EjercicioRepository  extends CrudRepository<Ejercicio,Integer>{
 	
-	@Query("select E from ejercicio E, rutina_ejercicio RE, rutina R "
-			+ " WHERE RE.id_ejercicio=E.id_ejercicio AND RE.id_rutina=R.id_rutina AND R.id_rutina= :id_rutina")
-	public Iterable<Ejercicio>  ClaseSocio(@Param("id_rutina") String idRutina);
+	@Query("select e from RutinaEjercicio re JOIN Ejercicio e ON re.ejercicio.idEjercicio=e.idEjercicio WHERE re.rutina.idRutina= :idRutina")
+	public Iterable<Ejercicio>  EjercicioRutina(@Param("idRutina") Integer idRutina);
 	
 }

@@ -9,12 +9,12 @@ import co.com.springboot.domain.Instructor;
 
 @Repository
 public interface InstructorRepository extends CrudRepository<Instructor,Integer> {
-	@Query("select I from instructor I where I.usuario= :usuario")
+	@Query("select I from Instructor I where I.usuario= :usuario")
 	public Instructor validarUsuario(@Param("usuario") String usuario);
 	
-	@Query("select I from instructor I where I.cedula=")
-	public Instructor Buscar(@Param("cedula") int cedula);
+	@Query("select I from Instructor I where I.cedula= :cedula")
+	public Instructor Buscar(@Param("cedula") Integer cedula);
 	
-	@Query("select I from instructor I where I.usuario=?1 AND I.password=?2")
+	@Query("select I from Instructor I where I.usuario= :usuario AND I.password= :password")
 	public Instructor login(@Param("usuario") String usuario,@Param("password") String contrasena);
 }

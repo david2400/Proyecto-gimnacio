@@ -1,5 +1,6 @@
 package co.com.springboot.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import co.com.springboot.domain.Rutina ;
 import co.com.springboot.repository.RutinaRepository;
@@ -14,14 +16,13 @@ import co.com.springboot.repository.RutinaRepository;
 @RequestMapping("/Rutina")
 @Controller
 public class controllerRutina {
-	private final RutinaRepository  repoRutina;
 	
-	public controllerRutina (RutinaRepository repoRutina ) {
-		this.repoRutina = repoRutina ;
-	}
+	@Autowired
+	private RutinaRepository  repoRutina;
+	
 	
 	@PostMapping("/addRutina")
-    public String addCategoria(Rutina  Rutina , BindingResult result, Model model) {
+    public @ResponseBody String addCategoria(Rutina  Rutina , BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "add-Rutina ";
         }
@@ -32,7 +33,7 @@ public class controllerRutina {
     
     //controlador buscador por id---------------------------------------------
 	@GetMapping("/seachRutina /{idRutina}")
-	public String buscar(@PathVariable("idRutina") Integer id) {
+	public @ResponseBody String buscar(@PathVariable("idRutina") Integer id) {
 		Rutina  Rutina  = repoRutina .findById(id).orElseThrow(() -> new IllegalArgumentException("Invalido Rutina  id:" + id));
 
 		String mensaje = "ID: " + Rutina .getIdRutina () + " - Nombre " + Rutina .getNombre().toString();
@@ -43,7 +44,7 @@ public class controllerRutina {
     
   //controlador Actualizar---------------------------------------------
 	@GetMapping("/editarRutina /{idRutina}")
-	public String showUpdateForm(@PathVariable("idRutina") Integer id, Model model) {
+	public @ResponseBody String showUpdateForm(@PathVariable("idRutina") Integer id, Model model) {
 		Rutina  Rutina  = repoRutina .findById(id).orElseThrow(() -> new IllegalArgumentException("no existe la Rutina  con la id:" + id));
 		model.addAttribute("rutina ", Rutina );
 		return "update-Rutina ";

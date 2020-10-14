@@ -10,12 +10,12 @@ import co.com.springboot.domain.Administrador;
 
 @Repository
 public interface AdministradorRepository extends CrudRepository<Administrador,Integer>{
-	@Query("select a from administrador a where a.usuario= :usuario")
+	@Query("select a from Administrador a where a.usuario= :usuario")
 	public Administrador validarUsuario(@Param("usuario") String usuario);
 	
-	@Query("select a from administrador a where a.cedula= :cedula")
-	public Administrador Buscar(@Param("cedula") int cedula);
+	@Query("select a from Administrador a where a.cedula= :cedula")
+	public Administrador Buscar(@Param("cedula") Integer cedula);
 	
-	@Query("select a from administrador a where a.usuario= :usuario AND a.password= :password")
+	@Query("select a from Administrador a where a.usuario= :usuario AND a.password= :password")
 	public Administrador login(@Param("usuario") String usuario,@Param("password") String contrasena);
 }

@@ -93,7 +93,7 @@
                             <br><br>
                             <div id="add-product">
                                 <h2 class="text-info text-center"><small><i class="fa fa-plus"></i></small>&nbsp;&nbsp;Agregar un socio nuevo</h2>
-                                <form role="form" th:action="@{/addadmin}" th:object="${socio}" method="post" enctype="multipart/form-data">
+                                <form role="form" th:action="@{/addSocio}" th:object="${socio}" method="post" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label>Nombre</label>
                                         <input type="text" class="form-control" th:field="*{nombre}" id="txtCodigo_prod" placeholder="Código" required maxlength="40" name="codigo_prod">
@@ -112,7 +112,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Direccion</label>
-                                        <input type="text" class="form-control" th:field="*{direccion}" id="txttxtMarcaProd" placeholder="Marca" required maxlength="30" name="marca">
+                                        <input type="text" class="form-control" th:field="*{direccion}" id="txtMarcaProd" placeholder="Marca" required maxlength="30" name="marca">
                                         <span th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}" class="text-danger"></span>
                                     </div>
                                     <div class="form-group">
@@ -149,7 +149,7 @@
                             <br><br>
                             <div id="add-product">
                                 <h2 class="text-info text-center"><small><i class="fa fa-plus"></i></small>&nbsp;&nbsp;Agregar sala</h2>
-                                <form role="form" th:action="@{/addadmin}" th:object="${sala}" method="post" enctype="multipart/form-data">
+                                <form role="form" th:action="@{/addSala}" th:object="${sala}" method="post" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label>Nombre de sala</label>
                                         <input type="text" th:field="*{numero_sala}" class="form-control" id="txtCodigo_prod" placeholder="Numero de la sala" required maxlength="40" name="codigo_prod">
@@ -192,7 +192,7 @@
 
                         <div class="col-xs-12">
                             <br>
-                            <div class="panel panel-info" id="tablaProductos"></div>
+                            <div class="panel panel-info" id="tablaSala"></div>
                         </div>
                     </div>
                 </div>
@@ -328,7 +328,13 @@
 
                         <div class="col-xs-12">
                             <br>
-                            <div class="panel panel-info" id="tablaProductos"></div>
+                            <div class="panel panel-info" id="tablaSala"></div>
+                            <script>
+                                $(document).ready(function() {
+                                    $('#tablaTipoSala').load("Recursos/includes/tablaTipoSala.html");
+
+                                });
+                            </script>
                         </div>
                     </div>
                 </div>
@@ -337,34 +343,23 @@
                 <div role="tabpanel" class="tab-pane fade" id="TipoSala">
                     <div class="row">
                         <div class="col-xs-12 col-sm-6">
-                            <br><br>
-                            <div id="add-categori">
+                            <div id="add-categoria">
                                 <h2 class="text-info text-center"><small><i class="fa fa-plus"></i></small>&nbsp;&nbsp;Agregar un tipo de sala</h2>
-                                <form action="DAO/categoriaDAO.php" method="post" role="form">
-                                    <div class="form-group">
-                                        <label>Código</label>
-                                        <input class="form-control" type="text" id="txtCodCategoria" name="categ-code" placeholder="Código de categoria" maxlength="9" required="">
-                                    </div>
+                                <form action="#" th:action="@{/addTipoSala}" th:object="${Tiposala}" method="post">
                                     <div class="form-group">
                                         <label>Nombre</label>
-                                        <input class="form-control" type="text" id="txtNomCategoria" name="categ-name" placeholder="Nombre de categoria" maxlength="30" required="">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Descripción</label>
-                                        <input class="form-control" type="text" id="txtDescCategoria" name="categ-descrip" placeholder="Descripcióne de categoria" required="">
+                                        <input class="form-control" type="text" th:field="*{nombre}" id="txtNombreTipoSala" name="nombre" placeholder="Ingrese el nombre del nuevo tipo sala" required="">
+                                        <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="text-danger"></span>
                                     </div>
                                     <p class="text-center"><button type="submit" class="btn btn-primary">Agregar tipo de sala</button></p>
                                     <br>
-                                    <input type="text" name="funcion" style="display: none" value="crearCategoria">
-                                    <div id="res-form-add-categori" style="width: 100%;
-                                             text-align: center;
-                                             margin: 0;"></div>
+
                                 </form>
                             </div>
                         </div>
                         <div class="col-xs-12">
                             <br><br>
-                            <div class="panel panel-info" id="tablaCategoriasFull"></div>
+                            <div class="panel panel-info" id="tablaTipoSala"></div>
                         </div>
                     </div>
                 </div>

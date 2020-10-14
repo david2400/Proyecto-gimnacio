@@ -1,8 +1,8 @@
 package co.com.springboot.controller;
 
-import javax.persistence.Table;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,25 +10,33 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import co.com.springboot.domain.Administrador;
-import co.com.springboot.domain.Instructor;
 import co.com.springboot.repository.AdministradorRepository;
 
 @Controller
 @RequestMapping("/Administrador")
 public class controllerAdministrador {
 	
-private final AdministradorRepository  repoAdministrador;
+	@Autowired
+private AdministradorRepository  repoAdministrador;
 	
-	public controllerAdministrador(AdministradorRepository repoAdministrador) {
-		this.repoAdministrador= repoAdministrador;
-	}
+	@GetMapping("/singUpAdmin")
+    public String showSignUpForm(Administrador admin) {
+        return "MenuAdmin";
+    }
+	
+	@GetMapping("/singadmin")
+    public String showSignUpForm() {
+        return "add-admin";
+    }
 	
 	@PostMapping("/RegistrarAdministrador")
-	public String addUser(Administrador user, BindingResult result, Model model) {
+	public @ResponseBody String addUser(Administrador user, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return "RegistrarAdministrador";
 		}
@@ -42,12 +50,12 @@ private final AdministradorRepository  repoAdministrador;
 		}else {
 			model.addAttribute("message", "un Administrador ya esta registrado con ese Administradoro esa cedula");
 			return "RegistrarAdministrador";
-		}
-		
+		}	
 	}
 	
+	
 	@PostMapping("/updateAdministrador/{id}")
-    public String updateUser(@PathVariable("id") long id,String correo,String celular,String password,String foto, @Valid Administrador user, BindingResult result, Model model) {
+    public @ResponseBody String updateUser(@PathVariable("id") long id,String correo,String celular,String password,String foto, @Valid Administrador user, BindingResult result, Model model) {
         if (result.hasErrors()) {
             user.setCorreo(correo);
             user.setCelular(celular);
@@ -55,36 +63,36 @@ private final AdministradorRepository  repoAdministrador;
             user.setPassword(password);
             
             
-            return "Update-Administrador";	         	            
+            return "MenuAdmin";	         	            
         }	        
         repoAdministrador.save(user);
         model.addAttribute("users", repoAdministrador.findAll());
         return "index";
     }
 	
-	
-	@GetMapping("/deleteAdministrador/{cedula}")
-	public String delete(@PathVariable("cedula") Integer cedula, Model model) {
-		Administrador administrador= repoAdministrador.findById(cedula)
-				.orElseThrow(() -> new IllegalArgumentException("Invalid AdministradorId:" + cedula));
-		repoAdministrador.delete(administrador);
-		model.addAttribute("administrador", repoAdministrador.findAll());
-		return "index";
-	}
-	
-	
-
-	@PostMapping("/LoginAdministrador")
-	public String Entrar(Administrador usu,Model model) {
+	@PostMapping("/EntrarAdministrador")
+	public String Entrar(Administrador usu ,Model model) {
 		Administrador u = repoAdministrador.login(usu.getUsuario(), usu.getPassword());
 		if (u!=null) {
-			System.out.println(u.getPassword());
 			model.addAttribute("administrador", repoAdministrador.findAll());
 			return "redirect:/IndexLog";
 		}else {
-			model.addAttribute("message", "El usuario no se encuentra registrado");
+			model.addAttribute("message", "usuario no se encuentra registrado");
 			return "Login";
 		}
 		
+	}
+		
+
+	@RequestMapping(value = "/LoginAdministrador",method = RequestMethod.POST)
+	public String login(@RequestParam(required = false, value = "Login") String Login,
+			@RequestParam(required = false, value = "Cancelar") String cancelar, @Valid Administrador user,
+			BindingResult result, Model model) {
+		if ("Login".equals(Login)) {
+			return Entrar(user, model);
+		} else if ("Cancelar".equals(cancelar)) {
+			return "index";
+		}
+		return "index";
 	}
 }

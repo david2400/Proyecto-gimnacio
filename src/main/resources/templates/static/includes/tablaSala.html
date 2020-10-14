@@ -1,0 +1,50 @@
+<div class="panel-heading text-center">
+    <h3>Tipo de Salas <small class="tittles-pages-logo"></small></h3>
+    <input class="form-control" id="myInputSala" type="text" placeholder="Buscar un valor en la tabla">
+</div>
+<div id="res_update_Sala" style="width: 100%; padding:0px;"></div>
+
+<div class="table-responsive">
+    <table class="table table-bordered" id="tablaSala">
+        <thead class="">
+            <tr>
+                <th class="text-center"> ID </th>
+                <th class="text-center">Numero de sala</th>
+                <th class="text-center">Area del salon</th>
+                <th class="text-center">Ubicación</th>
+                <th class="text-center"> ID </th>
+                <th class="text-center">Tipo de sala</th>
+                <th class="text-center">Foto</th>
+                <th class="text-center">Estado</th>
+                <th class="text-center">Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <div>
+                <tr th:each="tipSala : ${Sala}">
+                    <td class="text-center" th:text=${idSala}> </td>
+                    <td class="text-center" th:text=${numeroSala}> </td>
+                    <td class="text-center" th:text=${area}> </td>
+                    <td class="text-center" th:text=${ubicacion}> </td>
+                    <td class="text-center" th:text=${tiposala.nombre}> </td>
+                    <td class="text-center" th:text=${estado}> </td>
+                    <td class="text-center" th:text=${foto}> </td>
+                    <td class="text-center"><a th:href="@/deleteTipoSala/{idTipoSala}(idTipoSala=${tipSala.idTipoSala}) "><button type="button" class="btn btn-info btn-sm editar_bodega" value="" data-toggle="modal" data-target="#editarBodega"><span class="fa fa-pencil"></span>Borrar</button></a>
+                    </td>
+                </tr>
+            </div>
+
+        </tbody>
+    </table>
+</div>
+<script>
+    $(document).ready(function() {
+        $("#myInputSala").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#tablaSala tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>

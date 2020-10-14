@@ -1,5 +1,6 @@
 package co.com.springboot.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import co.com.springboot.domain.ClaseSala;
 import co.com.springboot.repository.ClaseSalaRepository;
@@ -14,14 +16,13 @@ import co.com.springboot.repository.ClaseSalaRepository;
 @RequestMapping("/ClaseSala")
 @Controller
 public class controllerClaseSala{
-private final ClaseSalaRepository repoClaseSala;
+	@Autowired
+private ClaseSalaRepository repoClaseSala;
 	
-	public controllerClaseSala(ClaseSalaRepository repoClaseSala) {
-		this.repoClaseSala= repoClaseSala;
-	}
+	
 	
 	@PostMapping("/addClaseSala")
-    public String addCategoria(ClaseSala ClaseSala, BindingResult result, Model model) {
+    public @ResponseBody String addCategoria(ClaseSala ClaseSala, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "add-ClaseSala";
         }
@@ -33,7 +34,7 @@ private final ClaseSalaRepository repoClaseSala;
     
   //controlador Actualizar---------------------------------------------
 	@GetMapping("/editarClaseSala/{idClaseSala}")
-	public String showUpdateForm(@PathVariable("idClaseSala") Integer id, Model model) {
+	public @ResponseBody String showUpdateForm(@PathVariable("idClaseSala") Integer id, Model model) {
 		ClaseSala ClaseSala = repoClaseSala.findById(id).orElseThrow(() -> new IllegalArgumentException("no existe la ClaseSala con la id:" + id));
 		model.addAttribute("clase_sala", ClaseSala);
 		return "update-ClaseSala";
@@ -44,7 +45,7 @@ private final ClaseSalaRepository repoClaseSala;
     
     //controlador Eliminar---------------------------------------------
 	@GetMapping("/deleteClaseSala/{idClaseSala}")
-	public String delete(@PathVariable("idClaseSala") Integer id, Model model) {
+	public @ResponseBody String delete(@PathVariable("idClaseSala") Integer id, Model model) {
 		ClaseSala ClaseSala = repoClaseSala.findById(id).orElseThrow(() -> new IllegalArgumentException("no existe la ClaseSala con la id:" + id));
 		repoClaseSala.delete(ClaseSala);
 			
@@ -52,7 +53,7 @@ private final ClaseSalaRepository repoClaseSala;
 	}
 	
 	@GetMapping("/Todos-ClaseSala")
-	public String traerTodos(Model model) {
+	public @ResponseBody String traerTodos(Model model) {
 		Iterable<ClaseSala> lista = repoClaseSala.findAll();
 		model.addAttribute("clase_sala", lista);
 		for (ClaseSala ClaseSala : lista) {

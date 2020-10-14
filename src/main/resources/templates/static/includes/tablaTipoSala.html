@@ -1,0 +1,39 @@
+<div class="panel-heading text-center">
+    <h3>Tipo de Salas <small class="tittles-pages-logo"></small></h3>
+    <input class="form-control" id="myInputTipoSala" type="text" placeholder="Buscar un valor en la tabla">
+</div>
+<div id="res_update_bodega" style="width: 100%; padding:0px;"></div>
+
+<div class="table-responsive">
+    <table class="table table-bordered" id="tablaTipoSala">
+        <thead class="">
+            <tr>
+                <th class="text-center"> ID </th>
+                <th class="text-center">Tipo de sala</th>
+                <th class="text-center">Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <div>
+                <tr th:each="tipSala : ${tipoSala}">
+                    <td class="text-center" th:text=${idTipoSala}> </td>
+                    <td class="text-center" th:text=${nombre}> </td>
+                    <td class="text-center"><a th:href="@/deleteTipoSala/{idTipoSala}(idTipoSala=${tipSala.idTipoSala}) "><button type="button" class="btn btn-info btn-sm editar_bodega" value="" data-toggle="modal" data-target="#editarBodega"><span class="fa fa-pencil"></span>Borrar</button></a>
+                    </td>
+                </tr>
+            </div>
+
+        </tbody>
+    </table>
+</div>
+<script>
+    $(document).ready(function() {
+        $("#myInputTipoSala").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#tablaTipoSala tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>

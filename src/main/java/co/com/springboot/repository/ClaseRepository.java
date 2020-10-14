@@ -12,11 +12,9 @@ import co.com.springboot.domain.Clase;
 @Repository
 public interface ClaseRepository  extends CrudRepository<Clase,Integer>{
 	
-	@Query("select C from clase C, socio_clase SC, socio S WHERE SC.clase_id_clase=C.id_clase AND S.idsocio=SC.id_socio AND sysdate<=fecha S.idsocio= :idsocio")
-	public Iterable<Clase> SocioClase(@Param("idsocio") int idSocio);
 	
-	@Query("select C from clase C, instructor_clase IC, instructor i WHERE IC.id_clase=C.id_clase AND I.id_instructor=IC.id_instructor AND sysdate<=fecha S.idsocio= :id_instructor")
-	public Iterable<Clase> InstructorClase(@Param("id_instructor") int idInstructor);
+	@Query("select c from InstructorClase ic JOIN Clase c ON ic.clase.idClase=c.idClase WHERE ic.instructor.idInstructor= :idInstructor")
+	public Iterable<Clase> InstructorClase(@Param("idInstructor") Integer idInstructor);
 	
 	
 	
