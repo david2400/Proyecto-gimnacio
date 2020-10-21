@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Registration</title>
+    <title>Registrarse</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./static/css/main.css">
@@ -97,36 +97,38 @@
                             </div>
                         </div>
                         <div class="form-bottom">
-                            <form role="form" action="" class="login-form">
+                            <form action="#" th:action="@{/RegistrarSocio}" th:object="${socio}" method="post" class="login-form">
                                 <div class="input-group form-group">
-                                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
-                                    <input type="text" class="form-control" placeholder="First Name" aria-describedby="basic-addon1">
-                                </div>
-                                <div class="input-group form-group">
-                                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
-                                    <input type="text" class="form-control" placeholder="Last Name" aria-describedby="basic-addon1">
-                                </div>
-                                <div class="input-group form-group">
-                                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-envelope"></i></span>
-                                    <input type="text" class="form-control" placeholder="Email" aria-describedby="basic-addon1">
-                                </div>
-                                <div class="input-group form-group">
-                                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-phone"></i></span>
-                                    <input type="tel" class="form-control" placeholder="Phone No." aria-describedby="basic-addon1">
-                                </div>
-                                <div class="input-group form-group">
-                                    <textarea rows="4" cols="70" class="form-control" placeholder="Message"></textarea>
-                                </div>
-                                <div class="input-group form-group">
-                                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
-                                    <input type="text" class="form-control" placeholder="First Name" aria-describedby="basic-addon1">
-                                </div>
-                                <div class="input-group form-group">
-                                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
-                                    <input type="text" class="form-control" placeholder="First Name" aria-describedby="basic-addon1">
+                                    <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
+                                    <input type="text" class="form-control" th:field="*{nombre}" placeholder=" Nombre" aria-describedby="basic-addon1">
                                 </div>
 
-                                <button type="submit" class="btn">Sign me up!</button>
+                                <div class="input-group form-group">
+                                    <span th:if="${#fields.hasErrors('cedula')}" th:errors="*{cedula}" class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
+                                    <input type="text" class="form-control" th:field="*{cedula}" placeholder=" Cedula" aria-describedby="basic-addon1">
+                                </div>
+
+                                <div class="input-group form-group">
+                                    <span th:if="${#fields.hasErrors('correo')}" th:errors="*{correo}" class="input-group-addon" id="basic-addon1"><i class="fa fa-envelope"></i></span>
+                                    <input type="email" class="form-control" th:field="*{correo}" placeholder=" Correo" aria-describedby="basic-addon1">
+                                </div>
+
+                                <div class="input-group form-group">
+                                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-phone"></i></span>
+                                    <input type="tel" class="form-control" th:field="*{id}" placeholder="Phone No." aria-describedby="basic-addon1">
+                                </div>
+
+                                <div class="input-group form-group">
+                                    <span th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}" class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
+                                    <input type="text" class="form-control" th:field="*{usuario}" placeholder=" Usuario" aria-describedby="basic-addon1">
+                                </div>
+
+                                <div class="input-group form-group">
+                                    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
+                                    <input type="password" class="form-control" th:field="*{password}" placeholder=" Contraseña" aria-describedby="basic-addon1">
+                                </div>
+
+                                <button type="submit" class="btn">Registrarse!</button>
                             </form>
                         </div>
                     </div>
@@ -216,22 +218,7 @@
             </div>
         </div>
     </section>
-    <div id="panel">
-        <div id="panel-admin">
-            <div class="panel-admin-box">
-                <div id="tootlbar_colors">
-                    <button class="color" style="background-color:#1abac8;" onclick="mytheme(0)"></button>
-                    <button class="color" style="background-color:#ff8a00;" onclick="mytheme(1)"> </button>
-                    <button class="color" style="background-color:#b4de50;" onclick="mytheme(2)"> </button>
-                    <button class="color" style="background-color:#e54e53;" onclick="mytheme(3)"> </button>
-                    <button class="color" style="background-color:#1abc9c;" onclick="mytheme(4)"> </button>
-                    <button class="color" style="background-color:#159eee;" onclick="mytheme(5)"> </button>
-                </div>
-            </div>
 
-        </div>
-        <a class="open" href="#"><span><i class="fa fa-gear fa-spin"></i></span></a>
-    </div>
 
 </body>
 

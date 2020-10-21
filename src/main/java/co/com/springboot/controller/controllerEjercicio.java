@@ -1,5 +1,7 @@
 package co.com.springboot.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -8,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -21,12 +24,12 @@ public class controllerEjercicio {
 private  EjercicioRepository repoEjercicio;
 	
 	@PostMapping("/addEjercicio")
-    public @ResponseBody String addCategoria(Ejercicio Ejercicio, BindingResult result, Model model) {
+    public @ResponseBody String addCategoria(@Valid @RequestBody Ejercicio Ejercicio, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "add-Ejercicio";
         }
         repoEjercicio.save(Ejercicio);
-        model.addAttribute("ejercicio", repoEjercicio.findAll());
+        model.addAttribute("Ejercicios", repoEjercicio.findAll());
         return "lista-Ejercicio";
     }    
     
@@ -35,7 +38,7 @@ private  EjercicioRepository repoEjercicio;
 	@GetMapping("/editarEjercicio/{idEjercicio}")
 	public @ResponseBody String showUpdateForm(@PathVariable("idEjercicio") Integer id, Model model) {
 		Ejercicio Ejercicio = repoEjercicio.findById(id).orElseThrow(() -> new IllegalArgumentException("no existe la Ejercicio con la id:" + id));
-		model.addAttribute("ejercicio", Ejercicio);
+		model.addAttribute("Ejercicios", Ejercicio);
 		return "update-Ejercicio";
 	}
 	   
@@ -52,7 +55,7 @@ private  EjercicioRepository repoEjercicio;
 	@GetMapping("/Todos-Ejercicio")
 	public @ResponseBody String traerTodos(Model model) {
 		Iterable<Ejercicio> lista = repoEjercicio.findAll();
-		model.addAttribute("ejercicio", lista);
+		model.addAttribute("Ejercicios", lista);
 		for (Ejercicio Ejercicio : lista) {
 			System.out.println(Ejercicio.toString());
 			

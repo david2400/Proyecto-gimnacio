@@ -36,10 +36,6 @@ public class Sala implements Serializable {
 
 	private String ubicacion;
 
-	//bi-directional many-to-one association to ClaseSala
-	@OneToMany(mappedBy="sala")
-	private List<ClaseSala> claseSalas;
-
 	//bi-directional many-to-one association to Maquina
 	@OneToMany(mappedBy="sala")
 	private List<Maquina> maquinas;

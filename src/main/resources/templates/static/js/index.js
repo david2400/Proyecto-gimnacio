@@ -1,5 +1,5 @@
 $(document).ready(function() {
-
+    $('#tablaSala').load("./static/includes/tablaSala.html");
 
     $("#panel-admin").css("display", "none");
 
@@ -23,14 +23,6 @@ $(document).ready(function() {
 });
 
 
-$(window).scroll(function() {
-
-    if ($(this).scrollTop() > 50) {
-        $('header').addClass("sticky");
-    } else {
-        $('header').removeClass("sticky");
-    }
-});
 
 
 function toggleIcon(e) {

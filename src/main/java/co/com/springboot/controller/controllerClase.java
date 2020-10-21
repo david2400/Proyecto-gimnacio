@@ -1,5 +1,7 @@
 package co.com.springboot.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -24,7 +27,7 @@ private ClaseRepository repoClase;
 	
 	
 	@PostMapping("/addClase")
-    public @ResponseBody String addClase(Clase Clase, BindingResult result, Model model) {
+    public @ResponseBody String addClase(@Valid @RequestBody Clase Clase, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "add-Clase";
         }
@@ -44,7 +47,15 @@ private ClaseRepository repoClase;
 		return "Buscar";
 	}
     
-	
+	 //controlador Eliminar---------------------------------------------
+		@GetMapping("/deleteClase/{idClase}")
+		public @ResponseBody String delete(@PathVariable("idClase") Integer id, Model model) {
+			Clase Clase = repoClase.findById(id).orElseThrow(() -> new IllegalArgumentException("no existe la Clase con la id:" + id));
+			repoClase.delete(Clase);
+				
+			return traerTodos(model);
+		}
+		
 	
   //controlador Actualizar---------------------------------------------
 	@GetMapping("/editarClase/{idClase}")
@@ -53,21 +64,7 @@ private ClaseRepository repoClase;
 		model.addAttribute("clase", Clase);
 		return "update-Clase";
 	}
-	
-	
-    
-    
-    //controlador Eliminar---------------------------------------------
-	@GetMapping("/deleteClase/{idClase}")
-	public @ResponseBody String delete(@PathVariable("idClase") Integer id, Model model) {
-		Clase Clase = repoClase.findById(id).orElseThrow(() -> new IllegalArgumentException("no existe la Clase con la id:" + id));
-		repoClase.delete(Clase);
-			
-		return traerTodos(model);
-	}
-	
-	
-	
+		
 	@GetMapping("/Todos-Clase")
 	public @ResponseBody String traerTodos(Model model) {
 		Iterable<Clase> lista = repoClase.findAll();

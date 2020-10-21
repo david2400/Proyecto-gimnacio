@@ -7120,6 +7120,7 @@ button.close {
     display: none;
     overflow: hidden;
     position: fixed;
+    background-color: rgba(0, 0, 0, 0.5);
     top: 0;
     right: 0;
     bottom: 0;
@@ -7177,7 +7178,6 @@ button.close {
     bottom: 0;
     left: 0;
     z-index: 1040;
-    background-color: #000;
 }
 
 .modal-backdrop.fade {

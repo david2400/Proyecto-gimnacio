@@ -4953,6 +4953,7 @@ body.lightgreen #login-reg .form-box .btn {
 #prove-product-cat-config {
     background-color: white;
     min-height: 900px;
+    padding-bottom: 250px;
 }
 
 #container-page-configAdmin {

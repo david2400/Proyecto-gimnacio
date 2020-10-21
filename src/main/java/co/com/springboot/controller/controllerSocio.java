@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,7 +26,7 @@ private SocioRepository  repoSocio;
 	
 	
 	@PostMapping("/RegistrarSocio")
-	public @ResponseBody String addUser(Socio user, BindingResult result, Model model) {
+	public @ResponseBody String addUser(@Valid @RequestBody Socio user, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return "RegistrarSocio";
 		}
@@ -33,18 +34,18 @@ private SocioRepository  repoSocio;
 		Socio us=repoSocio.Buscar(user.getCedula());
 		if(u==null && us ==null) {
 			repoSocio.save(user);
-			model.addAttribute("socio", repoSocio.findAll());
+			model.addAttribute("Socios", repoSocio.findAll());
 			
-			return "indexVendedorLogueado";
+			return "index";
 		}else {
-			model.addAttribute("message", "un Socioya esta registrado con ese Socioo esa cedula");
+			model.addAttribute("message", "un Socio ya esta registrado con ese Socioo esa cedula");
 			return "RegistrarSocio";
 		}
 		
 	}
 	
 	@PostMapping("/updateSocio/{id}")
-    public @ResponseBody String updateUser(@PathVariable("id") long id,String correo,String direccion,String password,String profesion, @Valid Socio user, BindingResult result, Model model) {
+    public @ResponseBody String updateUser(@PathVariable("id") long id,String correo,String direccion,String password,String profesion, @Valid @RequestBody Socio user,BindingResult result, Model model) {
         if (result.hasErrors()) {
             user.setCorreo(correo);
             user.setDireccion(direccion);
@@ -54,7 +55,7 @@ private SocioRepository  repoSocio;
             return "Update-Administrador";	         	            
         }	        
         repoSocio.save(user);
-        model.addAttribute("users", repoSocio.findAll());
+        model.addAttribute("Socios", repoSocio.findAll());
         return "index";
     }
 	
@@ -63,7 +64,7 @@ private SocioRepository  repoSocio;
 		Socio Socio= repoSocio.findById(cedula)
 				.orElseThrow(() -> new IllegalArgumentException("Invalid SocioId:" + cedula));
 		repoSocio.delete(Socio);
-		model.addAttribute("socio", repoSocio.findAll());
+		model.addAttribute("Socios", repoSocio.findAll());
 		return "index";
 	}
 	
@@ -74,7 +75,7 @@ private SocioRepository  repoSocio;
 		Socio u = repoSocio.login(usu.getUsuario(), usu.getPassword());
 		if (u!=null) {
 			System.out.println(u.getPassword());
-			model.addAttribute("socio", repoSocio.findAll());
+			model.addAttribute("Socios", repoSocio.findAll());
 			return "redirect:/IndexLog";
 		}else {
 			model.addAttribute("message", "Socio no se encuentra registrado");

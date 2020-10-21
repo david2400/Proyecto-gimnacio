@@ -27,8 +27,7 @@ public class Socio implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idsocio;
 	
-	@Size(min = 5, max = 100, message = "{error.socio.celular}")
-	@NotBlank(message="Se te olvido Ingresar la cedula")
+	@NotNull(message = "{error.campoObligatorio}")
 	private int cedula;
 
 	@Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$",message="{error.usuario.correo}")

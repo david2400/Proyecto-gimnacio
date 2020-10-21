@@ -13,7 +13,7 @@ import co.com.springboot.domain.Clase;
 public interface ClaseRepository  extends CrudRepository<Clase,Integer>{
 	
 	
-	@Query("select c from InstructorClase ic JOIN Clase c ON ic.clase.idClase=c.idClase WHERE ic.instructor.idInstructor= :idInstructor")
+	@Query("select c from InstructorClase ic,Clase c WHERE ic.clase.idClase=c.idClase AND ic.instructor.idInstructor= :idInstructor")
 	public Iterable<Clase> InstructorClase(@Param("idInstructor") Integer idInstructor);
 	
 	

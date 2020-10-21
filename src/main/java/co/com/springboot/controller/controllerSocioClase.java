@@ -22,6 +22,8 @@ private SocioClaseRepository repoClaseSocio;
 	
 	
 	
+		
+	
 	@GetMapping("/ListarSociosClase/{id_clase}")
 	public @ResponseBody String ClasesSocio(@PathVariable("id_clase") Integer idClase,Model model) {
 		Iterable<Socio> lista = repoClaseSocio.ListaSocioClase(idClase);

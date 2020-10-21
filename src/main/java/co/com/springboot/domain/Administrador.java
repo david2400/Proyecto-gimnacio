@@ -33,7 +33,6 @@ public class Administrador implements Serializable {
 	private int idAdministrador;
 	
 	@NotNull(message = "{error.campoObligatorio}")
-	@NotBlank(message="Se te olvido Ingresar la cedula")	
 	private int cedula;
 	
 	@Size(min = 5, max = 100, message = "{error.usuario.telefono}")

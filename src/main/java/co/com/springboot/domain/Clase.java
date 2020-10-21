@@ -43,17 +43,11 @@ public class Clase implements Serializable {
 	
 	@NotNull(message = "{error.campoObligatorio}")
 	@NotBlank(message="El nombre de la clase es obligatoria")
-	
 	private String nombre;
 	
-	@NotNull(message = "{error.campoObligatorio}")
-	@NotBlank(message="Se te olvido Ingresar la sala donde se dara la clase")
-	@Column(name="sala_idsala")
-	private int salaIdsala;
-
-	//bi-directional many-to-one association to ClaseSala
-	@OneToMany(mappedBy="clase")
-	private List<ClaseSala> claseSalas;
+	@ManyToOne
+	@JoinColumn(name="idSala")
+	private Sala sala;
 
 	//bi-directional many-to-one association to InstructorClase
 	@OneToMany(mappedBy="clase")

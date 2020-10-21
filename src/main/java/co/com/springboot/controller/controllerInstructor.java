@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,11 +24,9 @@ public class controllerInstructor {
 
 	@Autowired
 private InstructorRepository  repoInstructor;
-	
-	
-	
+		
 	@PostMapping("/RegistrarInstructor")
-	public @ResponseBody String addUser(Instructor user, BindingResult result, Model model) {
+	public @ResponseBody String addUser(@Valid @RequestBody Instructor user, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return "MenuAdmin";
 		}
@@ -35,7 +34,7 @@ private InstructorRepository  repoInstructor;
 		Instructor us=repoInstructor.Buscar(user.getCedula());
 		if(u==null && us ==null) {
 			repoInstructor.save(user);
-			model.addAttribute("Instructor", repoInstructor.findAll());
+			model.addAttribute("Instructores", repoInstructor.findAll());
 			
 			return "index";
 		}else {
@@ -48,24 +47,18 @@ private InstructorRepository  repoInstructor;
 	public @ResponseBody String delete(@PathVariable("cedula") Integer cedula, Model model) {
 		Instructor Instructor= repoInstructor.Buscar(cedula);
 		repoInstructor.delete(Instructor);
-		model.addAttribute("Instructor", repoInstructor.findAll());
+		model.addAttribute("Instructores", repoInstructor.findAll());
 		return "MenuAdmin";
 	}
 	
 	 //controlador Actualizar---------------------------------------------
 		@PostMapping("/updateInstructor/{cedula}")
-	    public @ResponseBody String updateUser(@PathVariable("cedula") long id,String correo,String celular,String password,String experienciaLaboral,String foto, @Valid Instructor user, BindingResult result, Model model) {
+	    public @ResponseBody String updateUser(@PathVariable("cedula") Integer cedula, @Valid Instructor user, BindingResult result, Model model) {
 	        if (result.hasErrors()) {
-	            user.setCorreo(correo);
-	            user.setCelular(celular);
-	            user.setExperienciaLaboral(experienciaLaboral);
-	            user.setFoto(foto);
-	            user.setPassword(password);
-	            	            
-	            return "MenuAdmin";	         	            
+	           return "MenuAdmin";	         	            
 	        }	        
 	        repoInstructor.save(user);
-	        model.addAttribute("Instructor", repoInstructor.findAll());
+	        model.addAttribute("Instructores", repoInstructor.findAll());
 	        return "MenuAdmin";
 	    }
 			
@@ -74,7 +67,7 @@ private InstructorRepository  repoInstructor;
 	public @ResponseBody String Entrar(Instructor usu ,Model model) {
 		Instructor u = repoInstructor.login(usu.getUsuario(), usu.getPassword());
 		if (u!=null) {
-			model.addAttribute("Instructor", repoInstructor.findAll());
+			model.addAttribute("Instructores", repoInstructor.findAll());
 			return "redirect:/MenuAdmin";
 		}else {
 			model.addAttribute("message", "usuario no se encuentra registrado");

@@ -28,7 +28,7 @@ public class Instructor implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idInstructor;
 
-	
+	@NotNull(message = "{error.campoObligatorio}")	
 	private int cedula;
 	
 	@Size(min = 5, max = 100, message = "{error.usuario.telefono}")
