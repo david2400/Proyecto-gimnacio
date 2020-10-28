@@ -19,16 +19,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import co.com.springboot.domain.Administrador;
 import co.com.springboot.repository.AdministradorRepository;
 
-@Controller
 @RequestMapping("/Administrador")
+@Controller
 public class controllerAdministrador {
 	
 	@Autowired
 private AdministradorRepository  repoAdministrador;
 	
-	@GetMapping("/singUpAdmin")
-    public String showSignUpForm(Administrador admin) {
+	@GetMapping("/LoginAdministrador")
+    public String showSignUpForm() {
         return "MenuAdmin";
+    }
+	
+	@GetMapping("/about")
+    public String about() {
+        return "about";
     }
 	
 	@PostMapping("/RegistrarAdministrador")

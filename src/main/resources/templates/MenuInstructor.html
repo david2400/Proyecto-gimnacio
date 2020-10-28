@@ -73,52 +73,7 @@
         </nav>
     </header>
 
-    <div class="modal fade modal-login" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content" id="modal-form-login">
-                <div class="modal-header">
-                    <h4 class="modal-title text-center text-primary" id="myModalLabel">Iniciar sesión </h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-                <form action="DAO/login.php" method="post" role="form" style="margin: 20px;" class="FormCatElec" data-form="login">
-                    <div class="form-group">
-                        <label><span class="glyphicon glyphicon-user"></span>&nbsp;Nombre</label>
-                        <input type="text" class="form-control" name="nombre-login" placeholder="Escribe tu nombre de usuario o email" required="" />
-                    </div>
-                    <div class="form-group">
-                        <label><span class="glyphicon glyphicon-lock"></span>&nbsp;Contraseña</label>
-                        <input type="password" class="form-control" name="clave-login" placeholder="Escribe tu contraseña" required="" />
-                    </div>
-                    <p>¿Cómo iniciaras sesión?</p>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="optionsRadios" value="option1" checked>
-                            Cliente
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="optionsRadios" value="option2">
-                            Vendedor
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="optionsRadios" value="option3">
-                            Administrador
-                        </label>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary btn-sm">Iniciar sesión</button>
-                        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancelar</button>
-                        <br><br><br>
-                        <a href="index.php?page=registration">Registrate aquí como cliente</a>
-                    </div>
-                    <div class="ResFormL" style="width: 100%; text-align: center; margin: 0;"></div>
-                </form>
-            </div>
-        </div>
-    </div>
+
 
     <section id="prove-product-cat-config">
         <div class="container">
@@ -186,16 +141,16 @@
 
                                     <div class="form-group">
                                         <label>Clase</label>
-                                        <select th:field="*{clase}">
-                                            <option th:each="instructor: ${clase}" th:text="123" th:value="${cat.id}"></option>
-                                        </select>
+                                        <select th:field="*{subcategoria.categoria}" id="categoria" class="form-control">
+                                            <option th:fragment="categorias" th:each="cate : ${categorias}" th:id="${cate.id}" th:value="${cate.id}" th:text="${cate.nombre}"></option>
+                                           </select>
                                     </div>
 
                                     <div class="form-group">
                                         <label>Socio</label>
-                                        <select th:field="*{instructores}">
-                                            <option th:each="instructor: ${cantegorias}" th:text="123" th:value="${cat.id}"></option>
-                                        </select>
+                                        <select th:field="*{subcategoria.categoria}" id="categoria" class="form-control">
+                                            <option th:fragment="categorias" th:each="cate : ${categorias}" th:id="${cate.id}" th:value="${cate.id}" th:text="${cate.nombre}"></option>
+                                           </select>
                                     </div>
 
 
@@ -233,16 +188,16 @@
 
                                     <div class="form-group">
                                         <label>Instructor</label>
-                                        <select th:field="*{instructor}">
-                                            <option th:each="instruct: ${Instructores}" th:text="instruct.nombre" th:value="${instruct.idInstructor}"></option>
-                                        </select>
+                                        <select th:field="*{subcategoria.categoria}" id="categoria" class="form-control">
+                                            <option th:fragment="categorias" th:each="cate : ${categorias}" th:id="${cate.id}" th:value="${cate.id}" th:text="${cate.nombre}"></option>
+                                           </select>
                                     </div>
 
                                     <div class="form-group">
                                         <label>Socio</label>
-                                        <select th:field="*{socio}">
-                                            <option th:each="soci: ${Socios}" th:text="soci.nombre" th:value="${soci.idsocio}"></option>
-                                        </select>
+                                        <select th:field="*{subcategoria.categoria}" id="categoria" class="form-control">
+                                            <option th:fragment="categorias" th:each="cate : ${categorias}" th:id="${cate.id}" th:value="${cate.id}" th:text="${cate.nombre}"></option>
+                                           </select>
                                     </div>
 
                                     <p class="text-center"><button type="submit" class="btn btn-primary">Agregar</button></p>
@@ -300,16 +255,17 @@
                                 <form th:action="@{/RutinaEjercicio/addRutinaEjercicio}" th:object="${ejercicio}" method="post" role="form">
                                     <div class="form-group">
                                         <label>Rutina</label>
-                                        <select th:field="*{rutina}">
-                                            <option th:each="ruti: ${Rutinas}" th:text="ruti.nombre" th:value="${ruti.idRutina}"></option>
-                                        </select>
+                                        <select th:field="*{subcategoria.categoria}" id="categoria" class="form-control">
+                                            <option th:fragment="categorias" th:each="cate : ${categorias}" th:id="${cate.id}" th:value="${cate.id}" th:text="${cate.nombre}"></option>
+                                           </select>
                                     </div>
 
                                     <div class="form-group">
                                         <label>Ejercicio</label>
-                                        <select th:field="*{ejercicio}">
-                                            <option th:each="ejer: ${Ejercicios}" th:text="ejer.nombre" th:value="${ejer.idEjercicio}"></option>
-                                        </select>
+                                        <select th:field="*{subcategoria.categoria}" id="categoria" class="form-control">
+                                            <option th:fragment="categorias" th:each="cate : ${categorias}" th:id="${cate.id}" th:value="${cate.id}" th:text="${cate.nombre}"></option>
+                                           </select>
+
                                     </div>
 
                                     <div class="form-group">
@@ -339,86 +295,6 @@
                     </div>
                 </div>
 
-            </div>
-        </div>
-    </section>
-    <section id="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3 col-sm-3 col-xs-12 block">
-                    <div class="footer-block">
-                        <h4>Address</h4>
-                        <hr/>
-                        <p>Lorem ipsum dolor sit amet sit legimus copiosae instructior ei ut vix denique fierentis ea saperet inimicu ut qui dolor oratio mnesarchum.
-                        </p>
-                        <a href="#" class="learnmore">Learn More <i class="fa fa-caret-right"></i></a>
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-sm-3 col-xs-12 block">
-                    <div class="footer-block">
-                        <h4>Useful Links</h4>
-                        <hr/>
-                        <ul class="footer-links">
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Features</a></li>
-                            <li><a href="#">Portfolio</a></li>
-                            <li><a href="#">Contact</a></li>
-                            <li><a href="#">Sign In</a></li>
-                            <li><a href="#">Sign Up</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-sm-3 col-xs-12 block">
-                    <div class="footer-block">
-                        <h4>Community</h4>
-                        <hr/>
-                        <ul class="footer-links">
-                            <li><a href="#">Blog</a></li>
-                            <li><a href="#">Forum</a></li>
-                            <li><a href="#">Free Goods</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-sm-3 col-xs-12 <block></block>">
-                    <div class="footer-block">
-                        <h4>Recent Posts</h4>
-                        <hr/>
-                        <ul class="footer-links">
-                            <li>
-                                <a href="#" class="post">Lorem ipsum dolor sit amet</a>
-                                <p class="post-date">May 25, 2017</p>
-                            </li>
-                            <li>
-                                <a href="#" class="post">Lorem ipsum dolor sit amet</a>
-                                <p class="post-date">May 25, 2017</p>
-                            </li>
-                            <li>
-                                <a href="#" class="post">Lorem ipsum dolor sit amet</a>
-                                <p class="post-date">May 25, 2017</p>
-                            </li>
-
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-    </section>
-
-    <section id="bottom-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-sm-6 col-xs-12 btm-footer-links">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Use</a>
-                </div>
-                <div class="col-md-6 col-sm-6 col-xs-12 copyright">
-                    Developed by <a href="#">Gimnasio EAM</a> designed by <a href="#">Designing Team</a>
-                </div>
             </div>
         </div>
     </section>

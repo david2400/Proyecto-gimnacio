@@ -35,6 +35,8 @@ public class Socio implements Serializable {
 
 	private String direccion;
 
+	private String telefono;
+	
 	@NotNull(message = "{error.campoObligatorio}")
 	@NotBlank(message = "Se te olvido Insertar la nombre")
 	@Pattern(regexp = "[A-Za-z ]+", message = "{error.sololetras}")

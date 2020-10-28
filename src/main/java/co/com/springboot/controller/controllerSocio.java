@@ -40,8 +40,7 @@ private SocioRepository  repoSocio;
 		}else {
 			model.addAttribute("message", "un Socio ya esta registrado con ese Socioo esa cedula");
 			return "RegistrarSocio";
-		}
-		
+		}		
 	}
 	
 	@PostMapping("/updateSocio/{id}")

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import co.com.springboot.domain.Administrador;
 import co.com.springboot.domain.Instructor;
 import co.com.springboot.repository.InstructorRepository;
 
@@ -25,10 +26,16 @@ public class controllerInstructor {
 	@Autowired
 private InstructorRepository  repoInstructor;
 		
+	@GetMapping("/LoginUpInstructor")
+    public String showSignUpForm(Instructor instructor) {
+        return "MenuInstructor";
+    }
+	
+	
 	@PostMapping("/RegistrarInstructor")
 	public @ResponseBody String addUser(@Valid @RequestBody Instructor user, BindingResult result, Model model) {
 		if (result.hasErrors()) {
-			return "MenuAdmin";
+			return "MenuInstructor";
 		}
 		Instructor u=repoInstructor.validarUsuario(user.getUsuario());
 		Instructor us=repoInstructor.Buscar(user.getCedula());

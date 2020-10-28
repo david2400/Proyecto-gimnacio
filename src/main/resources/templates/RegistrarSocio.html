@@ -71,16 +71,6 @@
     <!--/.nav-ends -->
     </header>
 
-    <section id="top_banner">
-        <div class="banner">
-            <div class="inner text-center">
-                <h2>Lorem ipsum dolor sit amet</h2>
-            </div>
-        </div>
-    </section>
-
-
-
     <section id="login-reg">
         <div class="container">
             <!-- Top content -->
@@ -97,35 +87,42 @@
                             </div>
                         </div>
                         <div class="form-bottom">
-                            <form action="#" th:action="@{/RegistrarSocio}" th:object="${socio}" method="post" class="login-form">
+                            <form action="#" th:action="@{/Socio/RegistrarSocio}" th:object="${socio}" method="post" class="login-form">
                                 <div class="input-group form-group">
-                                    <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
                                     <input type="text" class="form-control" th:field="*{nombre}" placeholder=" Nombre" aria-describedby="basic-addon1">
+                                    <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
                                 </div>
 
                                 <div class="input-group form-group">
-                                    <span th:if="${#fields.hasErrors('cedula')}" th:errors="*{cedula}" class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
                                     <input type="text" class="form-control" th:field="*{cedula}" placeholder=" Cedula" aria-describedby="basic-addon1">
+                                    <span th:if="${#fields.hasErrors('cedula')}" th:errors="*{cedula}" class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
                                 </div>
 
                                 <div class="input-group form-group">
-                                    <span th:if="${#fields.hasErrors('correo')}" th:errors="*{correo}" class="input-group-addon" id="basic-addon1"><i class="fa fa-envelope"></i></span>
                                     <input type="email" class="form-control" th:field="*{correo}" placeholder=" Correo" aria-describedby="basic-addon1">
+                                    <span th:if="${#fields.hasErrors('correo')}" th:errors="*{correo}" class="input-group-addon" id="basic-addon1"><i class="fa fa-envelope"></i></span>
+                                </div>
+                                <div class="input-group form-group">
+                                    <input type="text" class="form-control" th:field="*{profesion}" placeholder="Ingrese su profesion(No obligatorio)" aria-describedby="basic-addon1">
+                                    <span th:if="${#fields.hasErrors('profesion')}" th:errors="*{profesion}" class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
+                                </div>
+                                <div class="input-group form-group">
+                                    <input type="text" class="form-control" th:field="*{direccion}" placeholder="Ingrese su direccion" aria-describedby="basic-addon1">
+                                    <span th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}" class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
+                                </div>
+                                <div class="input-group form-group">
+                                    <input type="tel" class="form-control" th:field="*{telefono}" placeholder="Numero de telefono" aria-describedby="basic-addon1">
+                                    <span th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}" class="input-group-addon" id="basic-addon1"><i class="fa fa-phone"></i></span>
                                 </div>
 
                                 <div class="input-group form-group">
-                                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-phone"></i></span>
-                                    <input type="tel" class="form-control" th:field="*{id}" placeholder="Phone No." aria-describedby="basic-addon1">
-                                </div>
-
-                                <div class="input-group form-group">
-                                    <span th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}" class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
                                     <input type="text" class="form-control" th:field="*{usuario}" placeholder=" Usuario" aria-describedby="basic-addon1">
+                                    <span th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}" class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
                                 </div>
 
                                 <div class="input-group form-group">
-                                    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
                                     <input type="password" class="form-control" th:field="*{password}" placeholder=" Contraseña" aria-describedby="basic-addon1">
+                                    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
                                 </div>
 
                                 <button type="submit" class="btn">Registrarse!</button>
