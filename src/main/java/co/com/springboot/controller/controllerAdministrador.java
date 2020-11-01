@@ -31,10 +31,6 @@ private AdministradorRepository  repoAdministrador;
         return "MenuAdmin";
     }
 	
-	@GetMapping("/about")
-    public String about() {
-        return "about";
-    }
 	
 	@PostMapping("/RegistrarAdministrador")
 	public @ResponseBody String addUser(@Valid @RequestBody Administrador user, BindingResult result, Model model) {

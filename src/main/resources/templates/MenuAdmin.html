@@ -7,68 +7,18 @@
     <title>Administrador</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="./static/css/main.css">
-    <link rel="stylesheet" href="./static/css/skin.css">
-
+    <link rel="stylesheet" href="../static/css/main.css">
+    <link rel="stylesheet" href="../static/css/skin.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-    <script src="./static/js/index.js"></script>
+    <script src="../static/js/index.js"></script>
 
 </head>
 
 <body id="wrapper">
 
-    <section id="top-header">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-7 col-sm-7 col-xs-7 top-header-links">
-                    <ul class="contact_links">
-                        <li><i class="fa fa-phone"></i><a href="#">+91 848 594 5080</a></li>
-                        <li><i class="fa fa-envelope"></i><a href="#">GimnasioEAM@gmail.com</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-5 col-sm-5 col-xs-5 social">
-                    <ul class="social_links">
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        </div>
-
-    </section>
-
-    <header>
-        <nav class="navbar navbar-inverse">
-            <div class="container">
-                <div class="row">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			  </button>
-                        <a class="navbar-brand" href="#">
-                            <h1>Gimnasio EAM</h1>
-                        </a>
-                    </div>
-                    <div id="navbar" class="collapse navbar-collapse navbar-right">
-                        <ul class="nav navbar-nav">
-                            <li class="active"><a href="features.html">Inicio</a></li>
-                            <li><a href="about.html">About</a></li>
-                            <li><a href="planes.html">Planes</a></li>
-                            <li><a href="clase.html">Clases</a></li>
-                            <li><a href="contact.html">Contactenos</a></li>
-                            <li><a href="login.html">Login</a></li>
-                        </ul>
-                    </div>
-                    <!--/.nav-collapse -->
-                </div>
-            </div>
-        </nav>
-    </header>
+    <section th:replace="../static/plantilla/index ::top-header"> </section>
+    <header th:replace="../static/plantilla/index ::header"></header>
 
     <section id="prove-product-cat-config">
         <div class="container">
@@ -89,104 +39,13 @@
                 <!--==============================Panel Socio===============================-->
                 <div role="tabpanel" class="tab-pane fade" id="Usuarios">
                     <div class="row">
-                        <div class="col-xs-12 col-sm-6">
-                            <br><br>
-                            <div id="add-product">
-                                <h2 class="text-info text-center"><small><i class="fa fa-plus"></i></small>&nbsp;&nbsp;Agregar un socio nuevo</h2>
-                                <form role="form" th:action="@{/Socio/RegistrarSocio}" th:object="${socio}" method="post" enctype="multipart/form-data">
-                                    <div class="form-group">
-                                        <label>Nombre</label>
-                                        <input type="text" class="form-control" th:field="*{nombre}" id="txtCodigo_prod" placeholder="Código" required="required">
-                                        <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Cedula</label>
-                                        <input type="text" class="form-control" th:field="*{cedula}" placeholder="Cedula del socio" required="required">
-                                        <span th:if="${#fields.hasErrors('cedula')}" th:errors="*{cedula}" class="text-danger"></span>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Correo</label>
-                                        <input type="email" class="form-control" th:field="*{correo}" placeholder="Ingrese el correo del socio" required maxlength="50">
-                                        <span th:if="${#fields.hasErrors('correo')}" th:errors="*{correo}" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Direccion</label>
-                                        <input type="text" class="form-control" th:field="*{direccion}" placeholder="Marca" required maxlength="30">
-                                        <span th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Profesion</label>
-                                        <input type="text" class="form-control" th:field="*{profesion}" placeholder="Ingrese su profesion(No obligatorio)">
-                                        <span th:if="${#fields.hasErrors('profesion')}" th:errors="*{profesion}" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Usuario</label>
-                                        <input type="text" class="form-control" th:field="*{usuario}" placeholder="Ingrese el usuario" required maxlength="30">
-                                        <span th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Password</label>
-                                        <input type="password" class="form-control" th:field="*{password}" placeholder="Ingrese la contraseña" required maxlength="30" name="marca">
-                                    </div>
-                                    <input type="text" style="display: none" name="funcion" value="crearProducto">
-                                    <p class="text-center"><button type="submit" class="btn btn-primary">Agregar socio</button></p>
-                                    <div id="res-form-add" style="width: 100%; text-align: center; margin: 0;"></div>
-                                </form>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-12">
-                            <br>
-                            <div class="panel panel-info" id="tablaProductos"></div>
-                        </div>
+                        <div th:include="../static/includes/Usuario.html" th:remove="tag"></div>
                     </div>
                 </div>
                 <!--==============================Panel Sala===============================-->
                 <div role="tabpanel" class="tab-pane fade" id="Sala">
                     <div class="row">
-                        <div class="col-xs-12 col-sm-6">
-                            <br><br>
-                            <div id="add-product">
-                                <h2 class="text-info text-center"><small><i class="fa fa-plus"></i></small>&nbsp;&nbsp;Agregar sala</h2>
-                                <form role="form" th:action="@{/Sala/addSala}" th:object="${sala}" method="post" enctype="multipart/form-data">
-                                    <div class="form-group">
-                                        <label>Nombre de sala</label>
-                                        <input type="text" th:field="*{numeroSala}" class="form-control" placeholder="Numero de la sala" required maxlength="30">
-                                        <span th:if="${#fields.hasErrors('numeroSala')}" th:errors="*{numeroSala}" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Area de la sala (ej: 1200mt )</label>
-                                        <input type="text" th:field="*{area}" class="form-control" placeholder="Area de la sala" required maxlength="40">
-                                        <span th:if="${#fields.hasErrors('area')}" th:errors="*{area}" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Ubicación</label>
-                                        <textarea class="form-control" th:field="*{ubicacion}" placeholder="Ubicación de la sala"></textarea>
-                                        <span th:if="${#fields.hasErrors('ubicacion')}" th:errors="*{ubicacion}" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="categoria" class="col-form-label">Tipo de sala</label>
-                                        <select th:field="*{subcategoria.categoria}" id="categoria" class="form-control">
-                                            <option th:fragment="categorias" th:each="cate : ${categorias}" th:id="${cate.id}" th:value="${cate.id}" th:text="${cate.nombre}"></option>
-                                           </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Imagen de producto</label>
-                                        <input type="file" th:field="*{foto}" name="img">
-                                        <p class="help-block">Formato de imagenes admitido png, jpg, gif, jpeg</p>
-                                    </div>
-                                    <input type="text" style="display: none" name="funcion" value="crearProducto">
-                                    <p class="text-center"><button type="submit" class="btn btn-primary">Agregar sala</button></p>
-                                    <div id="res-form-add" style="width: 100%; text-align: center; margin: 0;"></div>
-                                </form>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-12">
-                            <br>
-                            <div class="panel panel-info" id="tablaSala"></div>
-                        </div>
+                        <div th:include="../static/includes/Sala.html" th:remove="tag"></div>
                     </div>
                 </div>
 
@@ -272,52 +131,7 @@
 
                 <div role="tabpanel" class="tab-pane fade" id="Maquinas">
                     <div class="row">
-                        <div class="col-xs-12 col-sm-6 ">
-                            <br><br>
-                            <div id="add-product ">
-                                <h2 class="text-info text-center "><small><i class="fa fa-plus "></i></small>&nbsp;&nbsp;Agregar una maquina nueva</h2>
-                                <form role="form " th:action="@{/Maquinas/addMaquinas}" th:object="${maquina}" method="post " enctype="multipart/form-data ">
-                                    <div class="form-group ">
-                                        <label>Código de la maquina</label>
-                                        <input type="text " class="form-control" th:field="*{codigo}" placeholder="Código " required maxlength="40">
-                                        <span th:if="${#fields.hasErrors('codigo')}" th:errors="*{codigo}" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group ">
-                                        <label>Nombre de la maquina</label>
-                                        <input type="text " class="form-control " th:field="*{nombre}" placeholder="Nombre " required maxlength="40 ">
-                                        <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="text-danger"></span>
-                                    </div>
-
-                                    <div class="form-group ">
-                                        <label>Descripción</label>
-                                        <textarea class="form-control" th:field="*{descripcion}" placeholder="Agregue una descripción del producto "></textarea>
-                                        <span th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}" class="text-danger"></span>
-                                    </div>
-
-                                    <div class="form-group ">
-                                        <label>Sala</label>
-                                        <select th:field="*{subcategoria.categoria}" id="categoria" class="form-control">
-                                            <option th:fragment="categorias" th:each="cate : ${categorias}" th:id="${cate.id}" th:value="${cate.id}" th:text="${cate.nombre}"></option>
-                                           </select>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Foto</label>
-                                        <input type="file" th:field="*{foto}" name="img">
-                                        <p class="help-block">Formato de imagenes admitido png, jpg, gif, jpeg</p>
-                                    </div>
-                                    <input type="text " style="display: none " name="funcion " value="crearProducto ">
-                                    <p class="text-center"><button type="submit" class="btn btn-primary">Agregar maquina</button></p>
-                                    <div id="res-form-add" style="width: 100%; text-align: center; margin: 0;"></div>
-                                </form>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-12">
-                            <br>
-                            <div class="panel panel-info" id="tablaSala"></div>
-
-                        </div>
+                        <div th:include="../static/includes/Maquina.html" th:remove="tag"></div>
                     </div>
                 </div>
 
@@ -325,27 +139,10 @@
                 <div role="tabpanel" class="tab-pane fade" id="TipoSala">
                     <div class="row">
                         <div class="col-xs-12 col-sm-6">
-                            <div id="add-categoria">
-                                <h2 class="text-info text-center"><small><i class="fa fa-plus"></i></small>&nbsp;&nbsp;Agregar un tipo de sala</h2>
-                                <form action="#" th:action="@{/TipoSala/addTipoSala}" th:object="${tiposala}" method="post">
-                                    <div class="form-group">
-                                        <label>Nombre</label>
-                                        <input class="form-control" type="text" th:field="*{nombre}" placeholder="Ingrese el nombre del nuevo tipo sala" required="required">
-                                        <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="text-danger"></span>
-                                    </div>
-                                    <p class="text-center"><button type="submit" class="btn btn-primary">Agregar tipo de sala</button></p>
-                                    <br>
-
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col-xs-12">
-                            <br><br>
-                            <div class="panel panel-info" id="tablaTipoSala"></div>
+                            <div th:include="../static/includes/TipoSala.html" th:remove="tag"></div>
                         </div>
                     </div>
                 </div>
-
                 <!--==============================General===============================-->
 
                 <div role="tabpanel" class="tab-pane fade  in active" id="General">
@@ -455,107 +252,9 @@
             </div>
     </section>
 
-    <section id="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3 col-sm-3 col-xs-12 block">
-                    <div class="footer-block">
-                        <h4>Address</h4>
-                        <hr/>
-                        <p>Lorem ipsum dolor sit amet sit legimus copiosae instructior ei ut vix denique fierentis ea saperet inimicu ut qui dolor oratio mnesarchum.
-                        </p>
-                        <a href="#" class="learnmore">Learn More <i class="fa fa-caret-right"></i></a>
-                    </div>
-                </div>
 
-                <div class="col-md-3 col-sm-3 col-xs-12 block">
-                    <div class="footer-block">
-                        <h4>Useful Links</h4>
-                        <hr/>
-                        <ul class="footer-links">
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Features</a></li>
-                            <li><a href="#">Portfolio</a></li>
-                            <li><a href="#">Contact</a></li>
-                            <li><a href="#">Sign In</a></li>
-                            <li><a href="#">Sign Up</a></li>
-                        </ul>
-                    </div>
-                </div>
+    <footer th:replace="../static/plantilla/index ::footer">
 
-                <div class="col-md-3 col-sm-3 col-xs-12 block">
-                    <div class="footer-block">
-                        <h4>Community</h4>
-                        <hr/>
-                        <ul class="footer-links">
-                            <li><a href="#">Blog</a></li>
-                            <li><a href="#">Forum</a></li>
-                            <li><a href="#">Free Goods</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="col-md-3 col-sm-3 col-xs-12 <block></block>">
-                    <div class="footer-block">
-                        <h4>Recent Posts</h4>
-                        <hr/>
-                        <ul class="footer-links">
-                            <li>
-                                <a href="#" class="post">Lorem ipsum dolor sit amet</a>
-                                <p class="post-date">May 25, 2017</p>
-                            </li>
-                            <li>
-                                <a href="#" class="post">Lorem ipsum dolor sit amet</a>
-                                <p class="post-date">May 25, 2017</p>
-                            </li>
-                            <li>
-                                <a href="#" class="post">Lorem ipsum dolor sit amet</a>
-                                <p class="post-date">May 25, 2017</p>
-                            </li>
-
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-    </section>
-
-    <section id="bottom-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-sm-6 col-xs-12 btm-footer-links">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Use</a>
-                </div>
-                <div class="col-md-6 col-sm-6 col-xs-12 copyright">
-                    Developed by <a href="#">Gimnasio EAM</a> designed by <a href="#">Designing Team</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <script>
-        //Productos
-        $(document).ready(function() {
-            $('#cambiarEstadoProducto').select2();
-        });
-        $(document).ready(function() {
-            $('#cambiarAgotadoProducto').select2();
-        });
-        //Domiciliarios
-        $(document).ready(function() {
-            $('#cambiarEstadoRepartidor').select2();
-        });
-        //Bodega
-        $(document).ready(function() {
-            $('#productosBodega').select2();
-        });
-        $(document).ready(function() {
-            $('#productosBodega2').select2();
-        });
-    </script>
 </body>
 
 </html>

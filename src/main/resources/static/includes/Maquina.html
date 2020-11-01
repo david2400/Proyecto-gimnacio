@@ -1,0 +1,92 @@
+<div class="col-xs-12 col-sm-6 ">
+    <br><br>
+    <div id="add-product ">
+        <h2 class="text-info text-center "><small><i class="fa fa-plus "></i></small>&nbsp;&nbsp;Agregar una maquina nueva</h2>
+        <form role="form " th:action="@{/Maquinas/addMaquinas}" th:object="${maquina}" method="post " enctype="multipart/form-data ">
+            <div class="form-group ">
+                <label>Código de la maquina</label>
+                <input type="text " class="form-control" th:field="*{codigo}" placeholder="Código " required maxlength="40">
+                <span th:if="${#fields.hasErrors('codigo')}" th:errors="*{codigo}" class="text-danger"></span>
+            </div>
+            <div class="form-group ">
+                <label>Nombre de la maquina</label>
+                <input type="text " class="form-control " th:field="*{nombre}" placeholder="Nombre " required maxlength="40 ">
+                <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="text-danger"></span>
+            </div>
+
+            <div class="form-group ">
+                <label>Descripción</label>
+                <textarea class="form-control" th:field="*{descripcion}" placeholder="Agregue una descripción del producto "></textarea>
+                <span th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}" class="text-danger"></span>
+            </div>
+
+            <div class="form-group ">
+                <label>Sala</label>
+                <select th:field="*{subcategoria.categoria}" id="categoria" class="form-control">
+                    <option th:fragment="categorias" th:each="cate : ${categorias}" th:id="${cate.id}" th:value="${cate.id}" th:text="${cate.nombre}"></option>
+                   </select>
+            </div>
+
+            <div class="form-group">
+                <label>Foto</label>
+                <input type="file" th:field="*{foto}" name="img">
+                <p class="help-block">Formato de imagenes admitido png, jpg, gif, jpeg</p>
+            </div>
+            <input type="text " style="display: none " name="funcion " value="crearProducto ">
+            <p class="text-center"><button type="submit" class="btn btn-primary">Agregar maquina</button></p>
+            <div id="res-form-add" style="width: 100%; text-align: center; margin: 0;"></div>
+        </form>
+    </div>
+</div>
+
+<div class="col-xs-12">
+    <div class="panel-heading text-center">
+        <h3>Salas <small class="tittles-pages-logo"></small></h3>
+        <input class="form-control" id="myInputMaquina" type="text" placeholder="Buscar un valor en la tabla">
+    </div>
+    <div id="res_update_Maquina" style="width: 100%; padding:0px;"></div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered" id="tablaMaquina">
+            <thead class="">
+                <tr>
+                    <th class="text-center"> ID </th>
+                    <th class="text-center">Numero de sala</th>
+                    <th class="text-center">Area del salon</th>
+                    <th class="text-center">Ubicación</th>
+                    <th class="text-center">Tipo de sala</th>
+                    <th class="text-center">Foto</th>
+                    <th class="text-center">Estado</th>
+                    <th class="text-center">Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <div>
+                    <tr th:each="tipSala : ${Sala}">
+                        <td class="text-center" th:text=${idSala}> </td>
+                        <td class="text-center" th:text=${numeroSala}> </td>
+                        <td class="text-center" th:text=${area}> </td>
+                        <td class="text-center" th:text=${ubicacion}> </td>
+                        <td class="text-center" th:text=${tiposala.nombre}> </td>
+                        <td class="text-center" th:text=${estado}> </td>
+                        <td class="text-center" th:text=${foto}> </td>
+                        <td class="text-center"><a th:href="@/deleteTipoSala/{idTipoSala}(idTipoSala=${tipSala.idTipoSala}) "><button type="button" class="btn btn-info btn-sm editar_bodega" value="" data-toggle="modal" data-target="#editarBodega"><span class="fa fa-pencil"></span>Borrar</button></a>
+                        </td>
+                    </tr>
+                </div>
+
+            </tbody>
+        </table>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $("#myInputMaquina").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#tablaMaquina tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+</div>

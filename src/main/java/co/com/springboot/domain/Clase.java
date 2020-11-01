@@ -30,8 +30,7 @@ public class Clase implements Serializable {
 	private String descripcion;
 	
 	@NotNull(message = "{error.campoObligatorio}")
-	@Temporal(TemporalType.DATE)
-	private Date fecha;
+	private String dias;
 	
 	@NotNull(message = "{error.campoObligatorio}")
 	@Temporal(TemporalType.DATE)

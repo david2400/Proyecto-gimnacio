@@ -35,22 +35,22 @@ function toggleIcon(e) {
 function mytheme(index) {
     switch (index) {
         case 0:
-            changeColor('cyan');
+            changeColor('orange');
             break;
         case 1:
             changeColor('orange');
             break;
         case 2:
-            changeColor('lightgreen');
+            changeColor('orange');
             break;
         case 3:
-            changeColor('red');
+            changeColor('orange');
             break;
         case 4:
-            changeColor('green');
+            changeColor('orange');
             break;
         case 5:
-            changeColor('blue');
+            changeColor('orange');
             break;
         default:
             changeColor('orange');
