@@ -1,0 +1,46 @@
+<div class="table-responsive" th:switch="${maquinas}">
+	<h2 th:case="null">No hay Maquinas Registradas</h2>
+	<div th:case="*">
+		<table class="table table-bordered" id="tablaMaquina">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Numero de sala</th>
+					<th>Area del salon</th>
+					<th>Descripcion</th>
+					<th>Tipo de sala</th>
+					<th>Foto</th>
+					<th>Estado</th>
+					<th>Eliminar</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="tipSala : ${maquinas}">
+					<td class="text-center" th:text=${idSala}></td>
+					<td class="text-center" th:text=${numeroSala}></td>
+					<td class="text-center" th:text=${area}></td>
+					<td class="text-center" th:text=${ubicacion}></td>
+					<td class="text-center" th:text=${tiposala.nombre}></td>
+					<td class="text-center" th:text=${estado}></td>
+					<td class="text-center" th:text=${foto}></td>
+					<td class="text-center"><a
+						th:href="@/deleteTipoSala/{idTipoSala}(idTipoSala=${tipSala.idTipoSala}) "><button
+								type="button" class="btn btn-info btn-sm editar_bodega" value=""
+								data-toggle="modal" data-target="#editarBodega">
+								<span class="fa fa-pencil"></span>Borrar
+							</button></a></td>
+				</tr>
+
+
+			</tbody>
+		</table>
+	</div>
+	<script th:inline="javascript">
+		$(document).ready(function() {
+				$("#myInputMaquina").on("keyup",function() {
+					var value = $(this).val().toLowerCase();
+					$("#tablaMaquina tr").filter(function() {
+						$(this).toggle(	$(this).text().toLowerCase().indexOf(value) > -1)}); });
+						});
+	</script>
+	</div>

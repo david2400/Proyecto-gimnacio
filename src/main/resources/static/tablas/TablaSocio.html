@@ -1,0 +1,46 @@
+<div class="table-responsive" th:switch="${socios}">
+	<h2 th:case="null">No hay Socios Registrados</h2>
+	<div th:case="*">
+		<table class="table table-bordered" id="tablaSocio">
+			<thead>
+				<tr>
+					<th>ID Socio</th>
+					<th>Nombre</th>
+					<th>Cedula</th>
+					<th>Correo</th>
+					<th>Direccion</th>
+					<th>Telefono</th>
+					<th>Profesion</th>
+					<th>Foto</th>
+					<th>Eliminar</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<tr th:each="soc:${socios}">
+					<td th:text=${soc.idsocio}></td>
+					<td th:text=${soc.nombre}></td>
+					<td th:text=${soc.cedula}></td>
+					<td th:text=${soc.correo}></td>
+					<td th:text=${soc.direccion}></td>
+					<td th:text=${soc.telefono}></td>
+					<td th:text=${soc.foto}></td>
+					<td th:text=${soc.profesion}></td>
+					<td><a	th:href="@/deleteTipoSala/{idsocio}(idTipoSala=${soc.idSocio}) "><button type="button" value="" data-toggle="modal" data-target="#editarBodega">
+								<span class="fa fa-pencil"></span>Borrar
+							</button></a></td>
+				</tr>
+
+
+			</tbody>
+		</table>
+	</div>
+</div>
+<script th:inline="javascript">
+		$(document).ready(function() {
+				$("#myInputSocio").on("keyup",function() {
+					var value = $(this).val().toLowerCase();
+					$("#tablaSocio tr").filter(function() {
+						$(this).toggle(	$(this).text().toLowerCase().indexOf(value) > -1)}); });
+						});
+</script>

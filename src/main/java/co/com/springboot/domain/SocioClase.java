@@ -30,6 +30,10 @@ public class SocioClase implements Serializable {
 	@JoinColumn(name="idSocio")
 	private Socio socio;
 
+	public SocioClase() {
+		super();
+	}
+
 	
 
 }

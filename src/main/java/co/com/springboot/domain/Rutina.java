@@ -45,6 +45,10 @@ public class Rutina implements Serializable {
 	@OneToMany(mappedBy="rutina")
 	private List<RutinaEjercicio> rutinaEjercicios;
 
+	public Rutina() {
+		super();
+	}
+
 	
 
 }

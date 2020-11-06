@@ -45,5 +45,11 @@ public class Sala implements Serializable {
 	@JoinColumn(name="idTipoSala")
 	private Tiposala tiposala;
 
+	public Sala() {
+		super();
+	}
 
+	
+
+	
 }

@@ -1,7 +1,5 @@
 package co.com.springboot.controller;
 
-import java.util.Optional;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,32 +7,30 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import co.com.springboot.repository.TipoSalaRepository;
 import co.com.springboot.domain.Tiposala;
 
-@RequestMapping("/TipoSala")
 @Controller
 public class controllerTipoSala {
 	@Autowired
 private TipoSalaRepository repoTipoSala;
 	
 	
-	@PostMapping("/addTipoSala")
-    public @ResponseBody String addTipoSala(@Valid @RequestBody Tiposala sala,BindingResult result, Model model) {
+	@PostMapping("/RegistrarTipoSala")
+    public @ResponseBody String addTipoSala(@Valid @ModelAttribute("tiposala") Tiposala sala,BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "MenuAdmin";
+        	model.addAttribute("tiposala", sala);
+        	model.addAttribute("FormTipoSala","active");
         }
         repoTipoSala.save(sala);
-        model.addAttribute("tipoSala", repoTipoSala.findAll());
-        return "MenuAdmin";
+        model.addAttribute("tiposalas", repoTipoSala.findAll());
+        return "redirect:/RegistrarSocio";
     }    
-    
     
   //controlador Actualizar---------------------------------------------
 	@GetMapping("/editarTipoSala/{idTipoSala}")

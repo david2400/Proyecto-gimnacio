@@ -1,0 +1,49 @@
+<div class="table-responsive" th:switch="${instructores}">
+	<h2 th:case="null">No hay Instructores Registrados</h2>
+	<div th:case="*">
+		<table class="table table-bordered" id="tablaMaquina">
+			<thead class="">
+				<tr>
+					<th>ID Instructor</th>
+					<th>Nombre</th>
+					<th>Cedula</th>
+					<th>Correo</th>
+					<th>Titulacion</th>
+					<th>Celular</th>
+					<th>Experiencia laboral</th>
+					<th>Foto</th>
+					<th>Eliminar</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="entrenador:${instructores}">
+					<td th:text=${entrenador.idInstructor}></td>
+					<td th:text=${entrenador.nombre}></td>
+					<td th:text=${entrenador.cedula}></td>
+					<td th:text=${entrenador.correo}></td>
+					<td th:text=${entrenador.titulacion}></td>
+					<td th:text=${entrenador.celular}></td>
+					<td th:text=${entrenador.experienciaLaboral}></td>
+					<td th:text=${entrenador.foto}></td>
+					<td><a
+						th:href="@/deleteTipoSala/{idTipoSala}(idTipoSala=${tipSala.idTipoSala}) "><button
+								type="button" class="btn btn-info btn-sm editar_bodega" value=""
+								data-toggle="modal" data-target="#editarBodega">
+								<span class="fa fa-pencil"></span>Borrar
+							</button></a></td>
+				</tr>
+
+
+			</tbody>
+		</table>
+	</div>
+	</div>
+	<script th:inline="javascript">
+		$(document).ready(function() {
+				$("#myInputInstructores").on("keyup",function() {
+					var value = $(this).val().toLowerCase();
+					$("#tablaMaquina tr").filter(function() {
+						$(this).toggle(	$(this).text().toLowerCase().indexOf(value) > -1)}); });
+						});
+</script>

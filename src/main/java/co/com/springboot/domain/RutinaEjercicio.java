@@ -38,5 +38,10 @@ public class RutinaEjercicio implements Serializable {
 	@JoinColumn(name="idRutina")
 	private Rutina rutina;
 
+	public RutinaEjercicio() {
+		super();
+	}
+
+	
 
 }

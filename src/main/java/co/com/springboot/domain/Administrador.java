@@ -58,6 +58,10 @@ public class Administrador implements Serializable {
 	@NotNull(message = "{error.campoObligatorio}")
 	@NotBlank(message="Se te olvido Ingresar la contraseña")
 	private String password;
+
+	public Administrador() {
+		super();
+	}
 	
 	
 

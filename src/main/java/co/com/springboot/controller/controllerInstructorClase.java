@@ -7,16 +7,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import co.com.springboot.domain.InstructorClase;
 import co.com.springboot.repository.InstructorClaseRepository;
 
-@RequestMapping("/InstructorClase")
 @Controller
 public class controllerInstructorClase {
 	@Autowired
@@ -24,13 +22,14 @@ private InstructorClaseRepository  repoInstructorClase;
 	
 	
 	
-	@PostMapping("/addInstructorClase")
-    public @ResponseBody String addCategoria(@Valid @RequestBody InstructorClase  InstructorClase , BindingResult result, Model model) {
+	@PostMapping("/RegistrarInstructorClase")
+    public @ResponseBody String RegistrarInstructorClase(@Valid @ModelAttribute("instructorclase") InstructorClase  InstructorClase , BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "add-InstructorClase ";
-        }
+        	model.addAttribute("ejercicios",InstructorClase);
+        	model.addAttribute("FormClase","active");
+        }else {
         repoInstructorClase .save(InstructorClase );
-        model.addAttribute("instructor_clase", repoInstructorClase .findAll());
+        model.addAttribute("instructorclase", repoInstructorClase .findAll());}
         return "lista-InstructorClase ";
     }    
     

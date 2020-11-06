@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,33 +17,31 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import co.com.springboot.domain.Sala;
 import co.com.springboot.repository.SalaRepository;
 
-@RequestMapping("/Sala")
 @Controller
 public class controllerSala {
 	@Autowired
 private SalaRepository repoSala;
 	
 	
-	@PostMapping("/addSala")
-    public @ResponseBody String addCategoria(@Valid @RequestBody Sala Sala, BindingResult result, Model model) {
+	@PostMapping("/RegistrarSala")
+    public @ResponseBody String RegistrarSala(@Valid @ModelAttribute("sala") Sala sala, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "MenuAdmin";
-        }
-        repoSala.save(Sala);
-        model.addAttribute("sala", repoSala.findAll());
-        return "MenuAdmin";
+        	model.addAttribute("sala", sala);
+        	model.addAttribute("FormSala","active");
+        }else {
+        repoSala.save(sala);
+        model.addAttribute("salas", repoSala.findAll());}
+        return "redirect:/RegistrarSocio";
     }    
     
     
   //controlador Actualizar---------------------------------------------
 	@GetMapping("/editarSala/{idSala}")
-	public @ResponseBody String showUpdateForm(@PathVariable("idSala") Integer id, Model model) {
+	public @ResponseBody String updateSala(@PathVariable("idSala") Integer id, Model model) {
 		Sala Sala = repoSala.findById(id).orElseThrow(() -> new IllegalArgumentException("no existe la Sala con la id:" + id));
 		model.addAttribute("sala", Sala);
 		return "MenuAdmin";
-	}
-	
-	
+	}	
     
     
     //controlador Eliminar---------------------------------------------
@@ -58,10 +57,7 @@ private SalaRepository repoSala;
 	public @ResponseBody String traerTodos(Model model) {
 		Iterable<Sala> lista = repoSala.findAll();
 		model.addAttribute("sala", lista);
-		for (Sala Sala : lista) {
-			System.out.println(Sala.toString());
-			
-		}
+		
 		return "lista-Sala";
 	
 }

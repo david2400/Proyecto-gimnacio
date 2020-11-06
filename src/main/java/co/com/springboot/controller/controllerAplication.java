@@ -8,7 +8,7 @@ public class controllerAplication {
 
 	@GetMapping("/")
     public String showSignUpForm() {
-        return "index";
+        return "inicio";
     }
 	
 	@GetMapping("/about")

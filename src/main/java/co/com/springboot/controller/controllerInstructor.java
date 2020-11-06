@@ -7,19 +7,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import co.com.springboot.domain.Administrador;
 import co.com.springboot.domain.Instructor;
 import co.com.springboot.repository.InstructorRepository;
 
-@RequestMapping("/Instructor")
 @Controller
 public class controllerInstructor {
 
@@ -33,19 +31,20 @@ private InstructorRepository  repoInstructor;
 	
 	
 	@PostMapping("/RegistrarInstructor")
-	public @ResponseBody String addUser(@Valid @RequestBody Instructor user, BindingResult result, Model model) {
+	public @ResponseBody String addUser(@Valid @ModelAttribute("instructor") Instructor instructor, BindingResult result, Model model) {
 		if (result.hasErrors()) {
-			return "MenuInstructor";
-		}
-		Instructor u=repoInstructor.validarUsuario(user.getUsuario());
-		Instructor us=repoInstructor.Buscar(user.getCedula());
+			model.addAttribute("instructor", instructor);
+        	model.addAttribute("FormInstructor","active");		}
+		
+		Instructor u=repoInstructor.validarUsuario(instructor.getUsuario());
+		Instructor us=repoInstructor.Buscar(instructor.getCedula());
 		if(u==null && us ==null) {
-			repoInstructor.save(user);
+			repoInstructor.save(instructor);
 			model.addAttribute("Instructores", repoInstructor.findAll());
-			
-			return "index";
+			model.addAttribute("FormInstructor","active");
+			return "MenuAdmin";
 		}else {
-			model.addAttribute("message", "un Instructorya esta registrado con ese Instructoro esa cedula");
+			model.addAttribute("message", "un usuario ya esta registrado con esa cedula");
 			return "MenuAdmin";
 		}		
 	}

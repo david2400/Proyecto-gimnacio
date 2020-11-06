@@ -31,6 +31,10 @@ public class Tiposala implements Serializable {
 	@OneToMany(mappedBy="tiposala")
 	private List<Sala> salas;
 
+	public Tiposala() {
+		super();
+	}
+
 	
 
 }

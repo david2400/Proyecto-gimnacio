@@ -28,6 +28,11 @@ public class Socio implements Serializable {
 	private int idsocio;
 	
 	@NotNull(message = "{error.campoObligatorio}")
+	@NotBlank(message = "Se te olvido Insertar la nombre")
+	@Pattern(regexp = "[A-Za-z ]+", message = "{error.sololetras}")
+	private String nombre;
+	
+	@NotNull(message = "{error.campoObligatorio}")
 	private int cedula;
 
 	@Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$",message="{error.usuario.correo}")
@@ -37,10 +42,7 @@ public class Socio implements Serializable {
 
 	private String telefono;
 	
-	@NotNull(message = "{error.campoObligatorio}")
-	@NotBlank(message = "Se te olvido Insertar la nombre")
-	@Pattern(regexp = "[A-Za-z ]+", message = "{error.sololetras}")
-	private String nombre;
+	private String foto;
 
 	private String profesion;
 	
@@ -57,6 +59,10 @@ public class Socio implements Serializable {
 	//bi-directional many-to-one association to SocioClase
 	@OneToMany(mappedBy="socio")
 	private List<SocioClase> socioClases;
+
+	public Socio() {
+		super();
+	}
 
 	
 

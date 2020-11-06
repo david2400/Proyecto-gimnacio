@@ -56,6 +56,10 @@ public class Clase implements Serializable {
 	@OneToMany(mappedBy="clase")
 	private List<SocioClase> socioClases;
 
+	public Clase() {
+		super();
+	}
+
 
 
 }

@@ -45,5 +45,9 @@ public class Maquina implements Serializable {
 	@JoinColumn(name="idSala")
 	private Sala sala;
 
+	public Maquina() {
+		super();
+	}
+
 	
 }

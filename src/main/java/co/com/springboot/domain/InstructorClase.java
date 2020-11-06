@@ -32,5 +32,9 @@ public class InstructorClase implements Serializable {
 	@JoinColumn(name="idInstructor")
 	private Instructor instructor;
 
+	public InstructorClase() {
+		super();
+	}
+
 
 }

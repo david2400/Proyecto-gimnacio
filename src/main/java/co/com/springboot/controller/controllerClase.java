@@ -7,32 +7,30 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import co.com.springboot.domain.Clase;
 import co.com.springboot.repository.ClaseRepository;
 
 
-@RequestMapping("/Clase")
+
 @Controller
 public class controllerClase {
 	
 @Autowired
 private ClaseRepository repoClase;
-	
-	
-	
-	@PostMapping("/addClase")
-    public @ResponseBody String addClase(@Valid @RequestBody Clase Clase, BindingResult result, Model model) {
+		
+	@PostMapping("/RegistrarClase")
+    public @ResponseBody String addClase(@Valid @ModelAttribute("clase") Clase clase, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "add-Clase";
-        }
-        repoClase.save(Clase);
-        model.addAttribute("clase", repoClase.findAll());
+        	model.addAttribute("clase", clase);
+        	model.addAttribute("FormClase","active");
+        }else {
+        repoClase.save(clase);
+        model.addAttribute("clases", repoClase.findAll());}
         return "MenuInstructor";
     }    
     
@@ -69,10 +67,7 @@ private ClaseRepository repoClase;
 	public @ResponseBody String traerTodos(Model model) {
 		Iterable<Clase> lista = repoClase.findAll();
 		model.addAttribute("clase", lista);
-		for (Clase Clase : lista) {
-			System.out.println(Clase.toString());
-			
-		}
+		
 		return "lista-Clase";
 	}	
 }

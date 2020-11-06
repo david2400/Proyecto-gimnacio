@@ -3179,6 +3179,7 @@ output {
     padding: 6px 12px;
     font-size: 14px;
     line-height: 1.428571429;
+    text-align:center;
     color: #555555;
     background-color: #fff;
     background-image: none;
@@ -3827,7 +3828,7 @@ fieldset[disabled] a.btn {
 
 .btn-default {
     color: #333;
-    background-color: #fff;
+    background-color:  rgba(22, 120, 233, 0.829);
     border-color: #ccc;
 }
 

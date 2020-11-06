@@ -1,105 +1,59 @@
-<div class="col-xs-12 col-sm-6">
-    <br><br>
-    <div id="add-product">
-        <h2 class="text-info text-center"><small><i class="fa fa-plus"></i></small>&nbsp;&nbsp;Agregar un socio nuevo</h2>
-        <form role="form" th:action="@{/Socio/RegistrarSocio}" th:object="${socio}" method="post" enctype="multipart/form-data">
-            <div class="form-group">
-                <label>Nombre</label>
-                <input type="text" class="form-control" th:field="*{nombre}" id="txtCodigo_prod" placeholder="Código" required="required">
-                <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label>Cedula</label>
-                <input type="text" class="form-control" th:field="*{cedula}" placeholder="Cedula del socio" required="required">
-                <span th:if="${#fields.hasErrors('cedula')}" th:errors="*{cedula}" class="text-danger"></span>
-            </div>
 
-            <div class="form-group">
-                <label>Correo</label>
-                <input type="email" class="form-control" th:field="*{correo}" placeholder="Ingrese el correo del socio" required maxlength="50">
-                <span th:if="${#fields.hasErrors('correo')}" th:errors="*{correo}" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label>Direccion</label>
-                <input type="text" class="form-control" th:field="*{direccion}" placeholder="Marca" required maxlength="30">
-                <span th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label>Profesion</label>
-                <input type="text" class="form-control" th:field="*{profesion}" placeholder="Ingrese su profesion(No obligatorio)">
-                <span th:if="${#fields.hasErrors('profesion')}" th:errors="*{profesion}" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label>Usuario</label>
-                <input type="text" class="form-control" th:field="*{usuario}" placeholder="Ingrese el usuario" required maxlength="30">
-                <span th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" class="form-control" th:field="*{password}" placeholder="Ingrese la contraseña" required maxlength="30" name="marca">
-            </div>
-            <div class="form-group">
-                <label>Foto</label>
-                <input type="file" th:field="*{foto}" name="img">
-                <p class="help-block">Formato de imagenes admitido png, jpg, gif, jpeg</p>
-            </div>
+<form action="#" th:object="${socio}"
+	th:action="@{/RegistrarSocioAdmin}" method="post"
+	enctype="multipart/form-data">
+	<div class="form-group">
+		<label>Nombre</label> <input type="text" class="form-control"
+			th:field="*{nombre}" id="txtCodigo_prod"
+			placeholder="Nombre del socio" required="required"> <span
+			th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
+			class="text-danger"></span>
+	</div>
+	<div class="form-group">
+		<label>Cedula</label> <input type="text" class="form-control"
+			th:field="*{cedula}" placeholder="Cedula del socio"
+			required="required"> <span
+			th:if="${#fields.hasErrors('cedula')}" th:errors="*{cedula}"
+			class="text-danger"></span>
+	</div>
 
-            <input type="text" style="display: none" name="funcion" value="crearProducto">
-            <p class="text-center"><button type="submit" class="btn btn-primary">Agregar socio</button></p>
-            <div id="res-form-add" style="width: 100%; text-align: center; margin: 0;"></div>
-        </form>
-    </div>
-</div>
+	<div class="form-group">
+		<label>Correo</label> <input type="email" class="form-control"
+			th:field="*{correo}" placeholder="Ingrese el correo del socio"
+			required maxlength="50"> <span
+			th:if="${#fields.hasErrors('correo')}" th:errors="*{correo}"
+			class="text-danger"></span>
+	</div>
+	<div class="form-group">
+		<label>Direccion</label> <input type="text" class="form-control"
+			th:field="*{direccion}" placeholder="Direccion de residencia"
+			required maxlength="30"> <span
+			th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}"
+			class="text-danger"></span>
+	</div>
+	<div class="form-group">
+		<label>Profesion</label> <input type="text" class="form-control"
+			th:field="*{profesion}"
+			placeholder="Ingrese su profesion (No obligatorio)"> <span
+			th:if="${#fields.hasErrors('profesion')}" th:errors="*{profesion}"
+			class="text-danger"></span>
+	</div>
+	<div class="form-group">
+		<label>Usuario</label> <input type="text" class="form-control"
+			th:field="*{usuario}" placeholder="Ingrese el usuario" required
+			maxlength="30"> <span th:if="${#fields.hasErrors('usuario')}"
+			th:errors="*{usuario}" class="text-danger"></span>
+	</div>
+	<div class="form-group">
+		<label>Password</label> <input type="password" class="form-control"
+			th:field="*{password}" placeholder="Ingrese la contraseña" required
+			maxlength="30" name="marca">
+	</div>
+	<div class="form-group">
+		<label>Foto</label> <input type="file" th:field="*{foto}" name="img">
+		<p class="help-block">Formato de imagenes admitido png, jpg, gif,
+			jpeg</p>
+	</div>
 
-<div class="col-xs-12">
-    <div class="panel-heading text-center">
-        <h3>Usuarios</h3><small class="tittles-pages-logo"></small></h3>
-        <input class="form-control" id="myInputSocio" type="text" placeholder="Buscar un valor en la tabla">
-    </div>
-    <div id="res_update_Socio" style="width: 100%; padding:0px;"></div>
-
-    <div class="table-responsive">
-        <table class="table table-bordered" id="tablaSocio">
-            <thead class="">
-                <tr>
-                    <th class="text-center">ID Socio </th>
-                    <th class="text-center">Numero de sala</th>
-                    <th class="text-center">Area del salon</th>
-                    <th class="text-center">Ubicación</th>
-                    <th class="text-center"> ID </th>
-                    <th class="text-center">Tipo de sala</th>
-                    <th class="text-center">Foto</th>
-                    <th class="text-center">Estado</th>
-                    <th class="text-center">Eliminar</th>
-                </tr>
-            </thead>
-            <tbody>
-
-                <div>
-                    <tr th:each="tipSala : ${Sala}">
-                        <td class="text-center" th:text=${idSala}> </td>
-                        <td class="text-center" th:text=${numeroSala}> </td>
-                        <td class="text-center" th:text=${area}> </td>
-                        <td class="text-center" th:text=${ubicacion}> </td>
-                        <td class="text-center" th:text=${tiposala.nombre}> </td>
-                        <td class="text-center" th:text=${estado}> </td>
-                        <td class="text-center" th:text=${foto}> </td>
-                        <td class="text-center"><a th:href="@/deleteTipoSala/{idTipoSala}(idTipoSala=${tipSala.idTipoSala}) "><button type="button" class="btn btn-info btn-sm editar_bodega" value="" data-toggle="modal" data-target="#editarBodega"><span class="fa fa-pencil"></span>Borrar</button></a>
-                        </td>
-                    </tr>
-                </div>
-
-            </tbody>
-        </table>
-    </div>
-    <script>
-        $(document).ready(function() {
-            $("#myInputSocio").on("keyup", function() {
-                var value = $(this).val().toLowerCase();
-                $("#tablaSocio tr").filter(function() {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                });
-            });
-        });
-    </script>
-</div>
+	<button type="submit" class="btn btn-primary">Agregar socio</button>
+</form>

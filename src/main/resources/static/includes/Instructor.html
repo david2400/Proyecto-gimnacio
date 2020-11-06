@@ -1,0 +1,79 @@
+
+<form role="form" th:action="@{/RegistrarInstructor}"
+	th:object="${instructor}" method="post" enctype="multipart/form-data">
+	
+		<div class="form-group">
+			<label>Nombre</label> <input type="text" th:field="*{nombre}"
+				class="form-control" placeholder="Nombre" required maxlength="40">
+			<span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
+				class="text-danger"></span>
+		</div>
+		
+		<label>Cedula</label> <input type="text" th:field="*{cedula}"
+			class="form-control" placeholder="Ingrese la cedula del instructor"
+			required maxlength="40"> <span
+			th:if="${#fields.hasErrors('cedula')}" th:errors="*{cedula}"
+			class="text-danger"></span>
+	   </div>
+
+	<div class="form-group">
+		<label>Celular</label> 
+		<input type="text" th:field="*{celular}" class="form-control" placeholder="Ingrese el celular del instructor" required maxlength="40" id="txtNombreProd"> 
+		<span th:if="${#fields.hasErrors('celular')}" th:errors="*{celular}" class="text-danger"></span>
+	</div>
+	<div class="form-group">
+		<label>Correo</label> <input type="email" th:field="*{correo}"
+			class="form-control" id="txtPrecioProd" placeholder="Correo" required
+			maxlength="40" name="precio"> <span
+			th:if="${#fields.hasErrors('correo')}" th:errors="*{correo}"
+			class="text-danger"></span>
+	</div>
+	<div class="form-group">
+		<label>Experiencia laboral</label>
+		<textarea class="form-control" th:field="*{experienciaLaboral}"
+			id="txtDescProd" placeholder="Agregue las experiencia laborales"></textarea>
+		<span th:if="${#fields.hasErrors('experienciaLaboral')}"
+			th:errors="*{experienciaLaboral}" class="text-danger"></span>
+	</div>
+	<div class="form-group">
+		<label>titulacion</label> <input type="text" class="form-control"
+			th:field="*{titulacion}" placeholder="Titulo del instructor" required
+			maxlength="40" id="txtNombreProd"> <span
+			th:if="${#fields.hasErrors('titulacion')}" th:errors="*{titulacion}"
+			class="text-danger"></span>
+
+	</div>
+	<div class="form-group">
+		<label>preparacion</label> <input type="text" class="form-control"
+			th:field="*{preparacion}"
+			placeholder="Ingrese la preparacion del instructor" required
+			maxlength="40"> <span
+			th:if="${#fields.hasErrors('preparacion')}"
+			th:errors="*{preparacion}" class="text-danger"></span>
+	</div>
+
+	<div class="form-group">
+		<label>Usuario</label> <input type="text" class="form-control"
+			th:field="*{usuario}" placeholder="Usuario" required maxlength="40">
+		<span th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}"
+			class="text-danger"></span>
+
+	</div>
+	<div class="form-group">
+		<label>Password</label> <input type="password" class="form-control"
+			th:field="*{password}" placeholder="Contraseña" required
+			maxlength="40"> <span
+			th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+			class="text-danger"></span>
+	</div>
+	<div class="form-group">
+		<label>Foto</label> <input type="file" th:field="*{foto}" name="img">
+		<p class="help-block">Formato de imagenes admitido png, jpg, gif,
+			jpeg</p>
+	</div>
+
+	<p class="text-center">
+		<button type="submit" class="btn btn-primary">Agregar instructor</button>
+	</p>
+
+</form>

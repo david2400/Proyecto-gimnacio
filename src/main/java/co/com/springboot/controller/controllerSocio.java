@@ -7,39 +7,59 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import co.com.springboot.domain.Socio;
 import co.com.springboot.repository.SocioRepository;
 
-@RequestMapping("/Socio")
 @Controller
 public class controllerSocio {
 	@Autowired	
 private SocioRepository  repoSocio;
 	
+	@GetMapping("/Registrar")
+    public String Registrarse(Model model,Socio socio) {
+        return "RegistrarSocio";
+    }	
 	
 	@PostMapping("/RegistrarSocio")
-	public @ResponseBody String addUser(@Valid @RequestBody Socio user, BindingResult result, Model model) {
+	public @ResponseBody String RegistrarSocio(@Valid @ModelAttribute("socio") Socio socio, BindingResult result, Model model) {
 		if (result.hasErrors()) {
-			return "RegistrarSocio";
+			model.addAttribute("socio", socio);
 		}
-		Socio u=repoSocio.validarUsuario(user.getUsuario());
-		Socio us=repoSocio.Buscar(user.getCedula());
+		Socio u=repoSocio.validarUsuario(socio.getUsuario());
+		Socio us=repoSocio.Buscar(socio.getCedula());
 		if(u==null && us ==null) {
-			repoSocio.save(user);
-			model.addAttribute("Socios", repoSocio.findAll());
+			repoSocio.save(socio);
+			model.addAttribute("socios", repoSocio.findAll());
 			
-			return "index";
+			return "redirect:/RegistrarSocio";
 		}else {
 			model.addAttribute("message", "un Socio ya esta registrado con ese Socioo esa cedula");
-			return "RegistrarSocio";
+			return "redirect:/RegistrarSocio";
+		}		
+	}
+	
+	@PostMapping("/RegistrarSocioAdmin")
+	public @ResponseBody String RegistrarSocioAdmin(@Valid @ModelAttribute("socio") Socio socio, BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			model.addAttribute("socio", socio);
+        	model.addAttribute("FormSocio","active");
+		}
+		Socio u=repoSocio.validarUsuario(socio.getUsuario());
+		Socio us=repoSocio.Buscar(socio.getCedula());
+		if(u==null && us ==null) {
+			repoSocio.save(socio);
+			model.addAttribute("socios", repoSocio.findAll());
+			
+			return "redirect:/LoginAdministrador";
+		}else {
+			model.addAttribute("message", "un Socio ya esta registrado con ese Socioo esa cedula");
+			return "redirect:/LoginAdministrador";
 		}		
 	}
 	
@@ -64,7 +84,7 @@ private SocioRepository  repoSocio;
 				.orElseThrow(() -> new IllegalArgumentException("Invalid SocioId:" + cedula));
 		repoSocio.delete(Socio);
 		model.addAttribute("Socios", repoSocio.findAll());
-		return "index";
+		return "redirect:/LoginAdministrador";
 	}
 	
 	
@@ -75,7 +95,7 @@ private SocioRepository  repoSocio;
 		if (u!=null) {
 			System.out.println(u.getPassword());
 			model.addAttribute("Socios", repoSocio.findAll());
-			return "redirect:/IndexLog";
+			return "redirect:/LoginSocio";
 		}else {
 			model.addAttribute("message", "Socio no se encuentra registrado");
 			return "Login";

@@ -36,6 +36,10 @@ public class Ejercicio implements Serializable {
 	@OneToMany(mappedBy="ejercicio")
 	private List<RutinaEjercicio> rutinaEjercicios;
 
+	public Ejercicio() {
+		super();
+	}
+
 
 	
 

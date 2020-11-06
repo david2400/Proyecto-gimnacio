@@ -1,260 +1,158 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="master">
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="master">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Administrador</title>
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../static/css/main.css">
-    <link rel="stylesheet" href="../static/css/skin.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-    <script src="../static/js/index.js"></script>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Administrador</title>
+<meta
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+	name="viewport">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" th:href="@{/css/main.css}" />
+<link rel="stylesheet" th:href="@{/css/skin.css}" />
+
+<script th:src="@{/js/index.css}"></script>
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
 </head>
 
 <body id="wrapper">
 
-    <section th:replace="../static/plantilla/index ::top-header"> </section>
-    <header th:replace="../static/plantilla/index ::header"></header>
+	<section th:replace="../static/plantilla/index ::top-header">
+	</section>
+	<header th:replace="../static/plantilla/index ::header"></header>
 
-    <section id="prove-product-cat-config">
-        <div class="container">
-            <div class="page-header">
-                <h1>Panel de Administración <small class="tittles-pages-logo"></small></h1>
-            </div>
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation"><a href="#Usuarios" role="tab" data-toggle="tab">Socios</a></li>
-                <li role="presentation"><a href="#Instructor" role="tab" data-toggle="tab">Instructor</a></li>
-                <li role="presentation"><a href="#Maquinas" role="tab" data-toggle="tab">Maquina</a></li>
-                <li role="presentation"><a href="#Sala" role="tab" data-toggle="tab">Sala</a></li>
-                <li role="presentation"><a href="#Productos" role="tab" data-toggle="tab">Clases</a></li>
-                <li role="presentation"><a href="#TipoSala" role="tab" data-toggle="tab">Tipo sala</a></li>
-                <li role="presentation" class="active"><a href="#General" role="tab" data-toggle="tab">Inf Administrador</a></li>
-            </ul>
-            <div class="tab-content">
-                <!--==============================Panel Socio===============================-->
-                <div role="tabpanel" class="tab-pane fade" id="Usuarios">
-                    <div class="row">
-                        <div th:include="../static/includes/Usuario.html" th:remove="tag"></div>
-                    </div>
-                </div>
-                <!--==============================Panel Sala===============================-->
-                <div role="tabpanel" class="tab-pane fade" id="Sala">
-                    <div class="row">
-                        <div th:include="../static/includes/Sala.html" th:remove="tag"></div>
-                    </div>
-                </div>
+	<section id="prove-product-cat-config">
+		<div class="container">
+			<div class="page-header">
+				<h1>
+					Panel de Administración <small class="tittles-pages-logo"></small>
+				</h1>
+			</div>
+			<!-- Nav tabs -->
+			<ul class="nav nav-tabs" role="tablist">
+				<li role="presentation"><a th:classappend="FormSocio"      href="#Usuarios"  role="tab" data-toggle="tab">Socios</a></li>
+				<li role="presentation"><a th:classappend="FormInstructor" href="#Instructor" role="tab" data-toggle="tab">Instructor</a></li>
+				<li role="presentation"><a th:classappend="FormSala" href="#Sala" role="tab" data-toggle="tab">Sala</a></li>
 
-                <!--==============================Panel Instructor===============================-->
-                <div role="tabpanel" class="tab-pane fade" id="Instructor">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-6">
-                            <br><br>
-                            <div id="add-product">
-                                <h2 class="text-info text-center"><small><i class="fa fa-plus"></i></small>&nbsp;&nbsp;Agregar un Instructor</h2>
-                                <form role="form" th:action="@{/Instructor/RegistrarInstructor}" th:object="${instructor}" method="post" enctype="multipart/form-data">
-                                    <div class="form-group">
-                                        <div class="form-group">
-                                            <label>Nombre</label>
-                                            <input type="text" th:field="*{nombre}" class="form-control" placeholder="Nombre" required maxlength="40">
-                                            <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="text-danger"></span>
-                                        </div>
-                                        <label>Cedula</label>
-                                        <input type="text" th:field="*{cedula}" class="form-control" placeholder="Ingrese la cedula del instructor" required maxlength="40">
-                                        <span th:if="${#fields.hasErrors('cedula')}" th:errors="*{cedula}" class="text-danger"></span>
-                                    </div>
+				
+			</ul>
+			<div class="tab-content">
+				<!--==============================Panel Socio===============================-->
+				<div role="tabpanel" class="tab-pane fade" th:classappend="FormSocio" id="Usuarios">
+					<div class="row">
+						<div class="col-xs-12 col-sm-6">
+							<br> <br>
+							<div id="add-Socio">
+								<h2 class="text-info text-center">
+									<small><i class="fa fa-plus"></i></small>&nbsp;&nbsp;Agregar un	socio nuevo
+								</h2>
+								<div th:include="../static/includes/Usuario.html" th:remove="tag"></div>
+							</div>
+						</div>
 
-                                    <div class="form-group">
-                                        <label>Celular</label>
-                                        <input type="text" th:field="*{celular}" class="form-control" placeholder="Ingrese el celular del instructor" required maxlength="40" id="txtNombreProd">
-                                        <span th:if="${#fields.hasErrors('celular')}" th:errors="*{celular}" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Correo</label>
-                                        <input type="email" th:field="*{correo}" class="form-control" id="txtPrecioProd" placeholder="Correo" required maxlength="40" name="precio">
-                                        <span th:if="${#fields.hasErrors('correo')}" th:errors="*{correo}" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Experiencia laboral</label>
-                                        <textarea class="form-control" th:field="*{experiencia_laboral}" id="txtDescProd" placeholder="Agregue las experiencia laborales"></textarea>
-                                        <span th:if="${#fields.hasErrors('experiencia_laboral')}" th:errors="*{experiencia_laboral}" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>titulacion</label>
-                                        <input type="text" class="form-control" th:field="*{titulacion}" placeholder="Titulo del instructor" required maxlength="40" id="txtNombreProd">
-                                        <span th:if="${#fields.hasErrors('titulacion')}" th:errors="*{titulacion}" class="text-danger"></span>
+						<div class="col-xs-12">
+							<div class="panel-heading text-center">
+								<h3>Usuarios</h3>
+								<small class="tittles-pages-logo"></small> <input
+									class="form-control" id="myInputSocio" type="text"
+									placeholder="Buscar un valor en la tabla">
+							</div>
+							<div id="res_update_Socio" style="width: 100%; padding: 0px;">
+							
+							 <div th:include="../static/tablas/TablaSocio.html" th:remove="tag"></div>
+							
+							</div>							
+						</div>
+					</div>
+                 </div>
+					<!--==============================Panel Instructor===============================-->
+					<div role="tabpanel" class="tab-pane fade" th:classappend="FormInstructor" id="Instructor" >
+						<div class="row">
+							<div class="col-xs-12 col-sm-6">
+								<br> <br>
+								<div id="add-product">
+									<h2 class="text-info text-center">
+										<small><i class="fa fa-plus"></i></small>&nbsp;&nbsp;Agregar un Instructor
+									</h2>
+									<div th:include="../static/includes/Instructor.html" th:remove="tag"></div>
 
-                                    </div>
-                                    <div class="form-group">
-                                        <label>preparacion</label>
-                                        <input type="text" class="form-control" th:field="*{preparacion}" placeholder="Ingrese la preparacion del instructor" required maxlength="40">
-                                        <span th:if="${#fields.hasErrors('preparacion')}" th:errors="*{preparacion}" class="text-danger"></span>
-                                    </div>
+								</div>
+							</div>
 
-                                    <div class="form-group">
-                                        <label>Usuario</label>
-                                        <input type="text" class="form-control" th:field="*{usuario}" placeholder="Usuario" required maxlength="40">
-                                        <span th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}" class="text-danger"></span>
+							<div class="col-xs-12">
+								<br> <br> <br>
+								<div class="panel-heading text-center">
+									<h3> Instructor <small class="tittles-pages-logo"></small>
+									</h3>
+									<input class="form-control" id="myInputInstructores"
+										type="text" placeholder="Buscar un valor en la tabla">
+								</div>
+								<div style="width: 100%; padding: 0px;">
+								      <div th:include="../static/tablas/TablaInstructores.html" th:remove="tag"></div>
+								      
+							  </div>
+							</div>
+						</div>
+					</div>
+                
+<!--==============================Panel Sala===============================-->					
+					
+					
+					<div role="tabpanel" class="tab-pane fade" th:classappend="FormSala" id="Sala">
+					<div class="row">
+						<div class="col-xs-12 col-sm-6">
+							<br> <br>
+							<div id="add-Socio">
+								<h2 class="text-info text-center">
+									<small><i class="fa fa-plus"></i></small>&nbsp;&nbsp;Agregar una sala
+								</h2>
+								<div th:include="../static/includes/Sala.html" th:remove="tag"></div>
+							</div>
+						</div>
 
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Password</label>
-                                        <input type="password" class="form-control" th:field="*{password}" placeholder="Contraseña" required maxlength="40">
-                                        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Foto</label>
-                                        <input type="file" th:field="*{foto}" name="img">
-                                        <p class="help-block">Formato de imagenes admitido png, jpg, gif, jpeg</p>
-                                    </div>
-                                    <input type="text" style="display: none" name="funcion" value="crearProducto">
-                                    <p class="text-center"><button type="submit" class="btn btn-primary">Agregar instructor</button></p>
-                                    <div id="res-form-add" style="width: 100%; text-align: center; margin: 0;"></div>
-                                </form>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-12">
-                            <br>
-                            <div class="panel panel-info" id="tablaProductos"></div>
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <!--==============================Panel Maquina===============================-->
-
-                <div role="tabpanel" class="tab-pane fade" id="Maquinas">
-                    <div class="row">
-                        <div th:include="../static/includes/Maquina.html" th:remove="tag"></div>
-                    </div>
-                </div>
-
-                <!--==============================Panel Tipo Sala===============================-->
-                <div role="tabpanel" class="tab-pane fade" id="TipoSala">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-6">
-                            <div th:include="../static/includes/TipoSala.html" th:remove="tag"></div>
-                        </div>
-                    </div>
-                </div>
-                <!--==============================General===============================-->
-
-                <div role="tabpanel" class="tab-pane fade  in active" id="General">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-6">
-                            <br><br>
-                            <!--GENERAL-->
-                            <div class="thumbnail" style="width: 90%">
-                                <img style="max-width: 20%" src="Recursos/img/logo_eam.png">
-                                <div class="caption center-all-contens">
-                                    <h3 style="text-align: center">PRODUCTOS</h3>
-
-                                    <p><b>Productos Registrados: </b>
-                                        <?php echo $sqlProd[0]; ?>
-                                    </p>
-                                    <p><b>Productos Registrados No Disponibles: </b>
-                                        <?php echo $sqlProdN[0]; ?>
-                                    </p>
-                                    <p><b>Productos En Bodega Disponibles: </b>
-                                        <?php echo $sqlProdN[0]; ?>
-                                    </p>
-                                    <p><b>Productos En Bodega Agotados: </b>
-                                        <?php echo $sqlProdAg[0]; ?>
-                                    </p>
-                                </div>
-                                <div class="caption center-all-contens">
-                                    <h3 style="text-align: center">PROVEEDORES</h3>
-                                    <?php
-                                    $sqlProv = mysqli_fetch_row(ejecutarSQL::consultar("SELECT count(id) FROM proveedor"));
-                                    ?>
-                                        <p><b>Cantidad Proveedores: </b>
-                                            <?php echo $sqlProv[0]; ?>
-                                        </p>
-                                </div>
-                                <div class="caption center-all-contens">
-                                    <h3 style="text-align: center">CATEGORIAS</h3>
-                                    <?php
-                                    $sqlCatD = mysqli_fetch_row(ejecutarSQL::consultar("SELECT count(id) FROM categoria"));
-                                    ?>
-                                        <p><b>Cantidad Categorias: </b>
-                                            <?php echo $sqlCatD[0]; ?>
-                                        </p>
-                                </div>
-                                <div class="caption center-all-contens">
-                                    <h3 style="text-align: center">VENDEDORES</h3>
-                                    <?php
-                                    $sqlCatnAdmin = mysqli_fetch_row(ejecutarSQL::consultar("SELECT count(id) FROM usuarios WHERE tipo='Vendedor'"));
-                                    ?>
-                                        <p><b>Cantidad Vendedores: </b>
-                                            <?php echo $sqlCatnAdmin[0]; ?>
-                                        </p>
-                                </div>
-                                <div class="caption center-all-contens">
-                                    <h3 style="text-align: center">DOMICILIARIOS</h3>
-                                    <?php
-                                    $sqlCatnAdmin = mysqli_fetch_row(ejecutarSQL::consultar("SELECT count(id) FROM domiciliario"));
-                                    ?>
-                                        <p><b>Cantidad Domiciliarios: </b>
-                                            <?php echo $sqlCatnAdmin[0]; ?>
-                                        </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-6">
-                            <br><br>
-                            <div id="add-inf_empresa">
-
-                                <h2 class="text-info text-center"><small><i class="fa fa-edit"></i></small>&nbsp;&nbsp;Actualizar Informacion </h2>
-                                <form th:action="@{/addadmin}" th:object="${administrador}" method="post" role="form">
-                                    <div class="form-group">
-                                        <label>Cedula</label>
-                                        <input class="form-control" th:field="*{repeticiones}" type="text" value=" " readonly>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Nombre</label>
-                                        <input class="form-control" th:field="*{repeticiones}" type="text" value=" " readonly>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Celular</label>
-                                        <input class="form-control" th:field="*{repeticiones}" type="text" value="">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Correo</label>
-                                        <input class="form-control" th:field="*{repeticiones}" type="text" required="" value="">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Direccion</label>
-                                        <input class="form-control" th:field="*{repeticiones}" type="text" required="" value="">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Usuario</label>
-                                        <input class="form-control" th:field="*{repeticiones}" type="text" value=" " readonly>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Password</label>
-                                        <input class="form-control" th:field="*{repeticiones}" type="text" value=" ">
-                                    </div>
-
-                                    <p class="text-center"><button type="submit" class="btn btn-primary">Actualizar</button></p>
-                                    <br>
-                                    <div id="res-form-update_inf" style="width: 100%; text-align: center; margin: 0;"></div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </section>
+						<div class="col-xs-12">
+							<div class="panel-heading text-center">
+								<h3>Salas</h3>
+								<small class="tittles-pages-logo"></small> <input
+									class="form-control" id="myInputSala" type="text"
+									placeholder="Buscar un valor en la tabla">
+							</div>
+							<div id="res_update_Socio" style="width: 100%; padding: 0px;">
+							
+							 <div th:include="../static/tablas/TablaSalas.html" th:remove="tag"></div>
+							
+							</div>							
+						</div>
+					</div>
+                 </div>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+				</div>
+			</div>
+	</section>
 
 
-    <footer th:replace="../static/plantilla/index ::footer">
-
+	<footer th:replace="../static/plantilla/index::footer">
 </body>
 
 </html>

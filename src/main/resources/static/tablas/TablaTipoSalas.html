@@ -1,0 +1,36 @@
+<div class="table-responsive" th:switch="${tiposalas}">
+	<h2 th:case="null">No hay Socios Registrados</h2>
+	<div th:case="*">
+		<table class="table table-bordered" id="tablaTipoSala">
+			<thead class="">
+				<tr>
+					<th>ID</th>
+					<th>Tipo de sala</th>
+					<th>Eliminar</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="tipSala:${tiposalas}">
+					<td th:text=${tipSala.idTipoSala}></td>
+					<td th:text=${tipSala.nombre}></td>
+					<td><a
+						th:href="@/deleteTipoSala/{idTipoSala}(idTipoSala=${tipSala.idTipoSala}) "><button
+								type="button" class="btn btn-info btn-sm editar_bodega" value=""
+								data-toggle="modal" data-target="#editarBodega">
+								<span class="fa fa-pencil"></span>Borrar
+							</button></a></td>
+				</tr>
+
+
+			</tbody>
+		</table>
+	</div>
+<script th:inline="javascript">
+		$(document).ready(function() {
+				$("#myInputTipoSala").on("keyup",function() {
+					var value = $(this).val().toLowerCase();
+					$("#tablaTipoSala tr").filter(function() {
+						$(this).toggle(	$(this).text().toLowerCase().indexOf(value) > -1)}); });
+						});
+</script>
+</div>

@@ -7,16 +7,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import co.com.springboot.domain.Rutina ;
 import co.com.springboot.repository.RutinaRepository;
 
-@RequestMapping("/Rutina")
 @Controller
 public class controllerRutina {
 	
@@ -24,14 +22,15 @@ public class controllerRutina {
 	private RutinaRepository  repoRutina;
 	
 	
-	@PostMapping("/addRutina")
-    public @ResponseBody String addCategoria(@Valid @RequestBody Rutina  Rutina , BindingResult result, Model model) {
+	@PostMapping("/RegistrarRutina")
+    public @ResponseBody String addCategoria(@Valid @ModelAttribute("rutina") Rutina  rutina, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "add-Rutina ";
-        }
-        repoRutina .save(Rutina );
-        model.addAttribute("Rutinas", repoRutina .findAll());
-        return "lista-Rutina ";
+        	model.addAttribute("rutina",rutina);
+        	model.addAttribute("FormRutina","active");
+        }else {
+        repoRutina .save(rutina);
+        model.addAttribute("rutinas", repoRutina .findAll());}
+        return "MenuAdmin";
     }    
     
     //controlador buscador por id---------------------------------------------
